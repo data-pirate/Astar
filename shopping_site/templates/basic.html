@@ -13,8 +13,8 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.theme.default.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/animate.css' %}">
-    {% block head %}
-    {% endblock %}
+	{% block head %}
+	{% endblock %}
 </head>
 
 <body>
@@ -320,14 +320,14 @@
 						<div class="cart_num">2</div>
 					</a></div>
 				<div class="cart_text">bag</div>
-				<div class="cart_price">$39.99 (1)</div>
+				<a class="cart_price">$39.99 (<span id='checkout_cart'></span>)</a>
 			</div>
 		</div>
 
-        <!-- Home -->
-        {% block body %}
+		<!-- Home -->
+		{% block body %}
 
-        {% endblock %}
+		{% endblock %}
 
 		<!-- Newsletter -->
 
@@ -419,8 +419,7 @@
 										<!-- Blog Item -->
 										<div
 											class="footer_blog_item d-flex flex-row align-items-start justify-content-start">
-											<div class="footer_blog_image"><a href="blog"><img
-														src="{% static 'images/footer_blog_1.jpg" alt=""></a></div>
+											<div class="footer_blog_image"><a href="blog"><img src="{% static 'images/footer_blog_1.jpg" alt=""></a></div>
 											<div class="footer_blog_content">
 												<div class="footer_blog_title"><a href="blog">what shoes to
 														wear</a></div>
@@ -591,10 +590,40 @@
 	<script src="{% static 'plugins/parallax-js-master/parallax.min.js' %}"></script>
 	<script src="{% static 'plugins/Isotope/isotope.pkgd.min.js' %}"></script>
 	<script src="{% static 'plugins/Isotope/fitcolumns.js' %}"></script>
-    
-    {% block js %}
-    
-    {% endblock %}
+	<script>
+		/* 
+	
+	5. Cart Javascript
+	
+	*/
+
+		if (localStorage.getItem('cartisjs') == null) {
+			var cart = {};
+			console.log('working');
+		}
+		else {
+			cart = JSON.parse(localStorage.getItem('cartisjs'));
+		}
+
+		$('.cartisjs').click(function () {
+			console.log('clicked');
+			var id = this.id.toString();
+			if (cart[id] != undefined) {
+				cart[id] += 1;
+			}
+			else {
+				cart[id] = 1;
+			}
+			localStorage.getItem('cart', JSON.stringify(cart));
+			console.log(cart);
+			document.getElementById('checkout_cart').innerHTML = Object.keys(cart).length;
+		});
+
+	</script>
+
+	{% block js %}
+
+	{% endblock %}
 </body>
 
 </html>
