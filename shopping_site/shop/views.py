@@ -16,8 +16,10 @@ def cart(request):
 def checkout(request):
     return render(request, 'checkout.html')
 
-def product(request):
-    return render(request, 'product.html')
+def product(request, id_of_prod):
+    product = Product.objects.filter(id=id_of_prod)
+    
+    return render(request, 'product.html', {'product': product[0]})
 
 def categories(request):
     return render(request, 'categories.html')

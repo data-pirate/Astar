@@ -9,5 +9,5 @@ urlpatterns = [
     path('cart/', views.cart, name='cart'),
     path('categories/', views.categories, name='category'),
     path('checkout/', views.checkout, name='checkout'),
-    path('product/', views.product, name='Products')
+    path('product/<int:id_of_prod>', views.product, name='Products')
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

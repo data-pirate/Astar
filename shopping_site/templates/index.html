@@ -148,25 +148,28 @@
 						{% for i in product %}
 						<div class="product grid-item hot">
 							<div class="product_inner">
-								<div class="product_image">
-									<img src="/media/{{i.image}}" alt="">
-									<!-- <div class="product_tag">hot</div> -->
-								</div>
-								<div class="product_content text-center">
-									<div class="product_title"><a href="product">{{ i.product_name }}</a></div>
-									<div class="product_price">${{ i.price }}</div>
-									<button id='p_id{{i.product_id}}'
-										class="product_button ml-auto mr-auto trans_200 cartisjs"><a>Add to
+								<a href="/product/{{ i.id }}">
+									<div class="product_image">
+										<img src="/media/{{i.image}}" alt="">
+										<!-- <div class="product_tag">hot</div> -->
+									</div>
+									<div class="product_content text-center">
+										<div class="product_title"><a href="product">{{ i.product_name }}</a></div>
+										<div class="product_price">${{ i.price }}</div>
+								</a>
+								<button id='p_id{{i.id}}'
+									class="product_button ml-auto mr-auto trans_200 cartisjs"><a>Add to
 										cart</a></button>
-								</div>
+
 							</div>
 						</div>
-						{% endfor %}
 					</div>
+					{% endfor %}
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
 </div>
 {% endblock %}
 

@@ -111,7 +111,7 @@
 					<div class="cart d-flex flex-row align-items-center justify-content-start">
 						<div class="cart_icon"><a href="cart">
 								<img src="{% static 'images/bag.png' %}" alt="">
-								<div class="cart_num">2</div>
+								<div class="cart_num"><span class="cartisjs"></span></div>
 							</a></div>
 					</div>
 
@@ -317,7 +317,7 @@
 			<div class="cart d-flex flex-row align-items-center justify-content-start">
 				<div class="cart_icon"><a href="cart">
 						<img src="{% static 'images/bag.png' %}" alt="">
-						<div class="cart_num">2</div>
+						<div class="cart_num"><span id='checkout_cart' class="cartisjs" ></span></div>
 					</a></div>
 				<div class="cart_text">bag</div>
 				<a class="cart_price">$39.99 (<span id='checkout_cart'></span>)</a>
@@ -609,7 +609,7 @@
 			console.log('clicked');
 			var id = this.id.toString();
 			if (cart[id] != undefined) {
-				cart[id] += 1;
+				cart[id] = cart[id] + 1;
 			}
 			else {
 				cart[id] = 1;
