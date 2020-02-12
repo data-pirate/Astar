@@ -145,18 +145,20 @@
 					<div class="products_container grid">
 
 						<!-- Product -->
-						{% for i in product %}
+						{% for every in product %}
 						<div class="product grid-item hot">
 							<div class="product_inner">
+								{% for each in every.productimage_set.all %}
 								<a href="/product/{{ i.id }}">
 									<div class="product_image">
-										<img src="/media/{{i.image}}" alt="">
+										<img src="/media/{{each.image}}" alt="">
 										<!-- <div class="product_tag">hot</div> -->
 									</div>
 									<div class="product_content text-center">
-										<div class="product_title"><a href="product">{{ i.product_name }}</a></div>
-										<div class="product_price">${{ i.price }}</div>
+										<div class="product_title"><a href="product">{{ every.product_name }}</a></div>
+										<div class="product_price">${{ every.price }}</div>
 								</a>
+								{% endfor %}
 								<button id='p_id{{i.id}}'
 									class="product_button ml-auto mr-auto trans_200 cartisjs"><a>Add to
 										cart</a></button>

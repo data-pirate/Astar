@@ -4,8 +4,21 @@ from .models import Product
 # Create your views here.
 def index(request):
     products = Product.objects.all()
-    product = {'product': products}
-    return render(request, 'index.html', product)
+    return render(request, 'index.html', {'product': products})
+
+def search(request):
+    try:
+        q = request.GET['q']
+    except:
+        q = None
+    
+    if q:
+        products = Product.objects.filter(product_name__icontains=q)
+        results = {'query': q, 'products': products}
+        return render(request, 'results.html', results)
+    else:
+        results = {}
+        return render(request, 'index.html')
 
 def blog(request):
     return render(request, 'blog.html')

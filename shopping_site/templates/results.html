@@ -1,0 +1,35 @@
+{% extends 'basic.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}">
+{% endblock %}
+
+{% block body %}
+
+
+<h1>you searched for: {{ query }}</h1>
+{% for image in images %}
+<div class="product grid-item">
+    <div class="product_inner">
+        <a href="/product/{{ products.id }}">
+            <div class="product_image">
+                <img src="/media/{{image.images}}" alt="">
+                <!-- <div class="product_tag">hot</div> -->
+            </div>
+            <div class="product_content text-center">
+                <div class="product_title"><a href="product">{{ products.product_name }}</a></div>
+                <div class="product_price">${{ products.price }}</div>
+        </a>
+        {% endfor %}
+        <button id='p_id{{products.id}}' class="product_button ml-auto mr-auto trans_200 cartisjs"><a>Add to
+                cart</a></button>
+
+    </div>
+</div> -->
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/custom.js' %}"></script>
+{% endblock %}
