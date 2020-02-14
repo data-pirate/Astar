@@ -10,24 +10,44 @@
 
 
 <h1>you searched for: {{ query }}</h1>
-{% for image in images %}
-<div class="product grid-item">
-    <div class="product_inner">
-        <a href="/product/{{ products.id }}">
-            <div class="product_image">
-                <img src="/media/{{image.images}}" alt="">
-                <!-- <div class="product_tag">hot</div> -->
-            </div>
-            <div class="product_content text-center">
-                <div class="product_title"><a href="product">{{ products.product_name }}</a></div>
-                <div class="product_price">${{ products.price }}</div>
-        </a>
-        {% endfor %}
-        <button id='p_id{{products.id}}' class="product_button ml-auto mr-auto trans_200 cartisjs"><a>Add to
-                cart</a></button>
+<!-- Products -->
 
-    </div>
-</div> -->
+<div class="products">
+	<div class="section_container">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="products_container grid">
+
+						<!-- Product -->
+                        {% for every in products %}
+						<div class="product grid-item hot">
+							<div class="product_inner">
+								{% for each in every.productimage_set.all %}
+								<a href="/product/{{ every.id }}">
+									<div class="product_image">
+										<img src="/media/{{each.image}}" alt="">
+										<!-- <div class="product_tag">hot</div> -->
+									</div>
+									<div class="product_content text-center">
+										<div class="product_title"><a href="product">{{ every.product_name }}</a></div>
+										<div class="product_price">${{ every.price }}</div>
+                                </a>
+								{% endfor %}
+								<button id='p_id{{i.id}}'
+									class="product_button ml-auto mr-auto trans_200 cartisjs"><a>Add to
+										cart</a></button>
+
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
 {% endblock %}
 
 {% block js %}

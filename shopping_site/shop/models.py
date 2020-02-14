@@ -21,6 +21,5 @@ class ProductImage(models.Model):
     featured = models.BooleanField(default=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 
-
     def __str__(self):
         return self.product.product_name

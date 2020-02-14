@@ -152,7 +152,9 @@
 								<a href="/product/{{ i.id }}">
 									<div class="product_image">
 										<img src="/media/{{each.image}}" alt="">
-										<!-- <div class="product_tag">hot</div> -->
+										{% if each.featured == True %}
+										    <div class="product_tag">hot</div>
+										{% endif %}
 									</div>
 									<div class="product_content text-center">
 										<div class="product_title"><a href="product">{{ every.product_name }}</a></div>
