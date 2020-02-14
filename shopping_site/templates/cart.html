@@ -52,15 +52,17 @@
 							<ul class="cart_items_list">
 
 								<!-- Cart Item -->
-								<li
-									class="cart_item item_list d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start">
+								{% for items in cart.products.all %}
+								<li class="cart_item item_list d-flex flex-lg-row flex-column align-items-lg-center
+									align-items-start justify-content-start">
 									<div
 										class="product d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start">
 										<div>
-											<div class="product_image"><img src="{% static 'images/cart_1.jpg' %}"
-													alt=""></div>
+											{% for image in items.productimage_set.all %}
+											<div class="product_image"><img src="/media/{{image.image}}" alt="">
+											</div>
 										</div>
-										<div class="product_name"><a href="product">Brown Shoulder Bag</a>
+										<div class="product_name"><a href="product">{{ items.product_name }}</a>
 										</div>
 									</div>
 									<div class="product_color text-lg-center product_text"><span>Color:
@@ -68,19 +70,22 @@
 									<div class="product_size text-lg-center product_text"><span>Size: </span>One
 										Size</div>
 									<div class="product_price text-lg-center product_text"><span>Price:
-										</span>$19.50</div>
+										</span>${{ items.price }}</div>
 									<div class="product_quantity_container">
 										<div class="product_quantity ml-lg-auto mr-lg-auto text-center">
 											<span class="product_text product_num">1</span>
-											<div class="qty_sub qty_button trans_200 text-center"><span>-</span>
+											<div class="qty_sub qty_button trans_200 text-center"><span id='quantity_{{ items.id }}'>-</span>
 											</div>
 											<div class="qty_add qty_button trans_200 text-center"><span>+</span>
 											</div>
 										</div>
 									</div>
-									<div class="product_total text-lg-center product_text"><span>Total:
-										</span>$19.50</div>
+									<div class="product_total text-lg-center product_text">
+										<span>Total:</span>${{ cart.total }}</div>
+
 								</li>
+								{% endfor %}
+								{% endfor %}
 							</ul>
 						</div>
 
@@ -88,11 +93,11 @@
 						<div class="cart_buttons d-flex flex-row align-items-start justify-content-start">
 							<div
 								class="cart_buttons_inner ml-auto d-flex flex-row align-items-start justify-content-start flex-wrap">
-								<div class="button button_continue trans_200"><a href="categories">continue
+								<div class="button button_continue trans_200"><a href="/categories">continue
 										shopping</a></div>
-								<div class="button button_clear trans_200"><a href="categories">clear
+								<div class="button button_clear trans_200"><a href="/categories">clear
 										cart</a></div>
-								<div class="button button_update trans_200"><a href="categories">update
+								<div class="button button_update trans_200"><a href="/categories">update
 										cart</a></div>
 							</div>
 						</div>
@@ -164,7 +169,7 @@
 							<ul class="cart_extra_total_list">
 								<li class="d-flex flex-row align-items-center justify-content-start">
 									<div class="cart_extra_total_title">Subtotal</div>
-									<div class="cart_extra_total_value ml-auto">$29.90</div>
+									<div class="cart_extra_total_value ml-auto">${{ cart.total }}</div>
 								</li>
 								<li class="d-flex flex-row align-items-center justify-content-start">
 									<div class="cart_extra_total_title">Shipping</div>
@@ -172,11 +177,11 @@
 								</li>
 								<li class="d-flex flex-row align-items-center justify-content-start">
 									<div class="cart_extra_total_title">Total</div>
-									<div class="cart_extra_total_value ml-auto">$29.90</div>
+									<div class="cart_extra_total_value ml-auto">${{ cart.total }}</div>
 								</li>
 							</ul>
 							<div class="checkout_button trans_200"><a href="checkout">proceed to
-									checkout</a></div>
+									checkout {{ all_prods }}</a></div>
 						</div>
 					</div>
 				</div>

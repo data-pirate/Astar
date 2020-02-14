@@ -161,8 +161,8 @@
 										<div class="product_price">${{ every.price }}</div>
 								</a>
 								{% endfor %}
-								<button id='p_id{{i.id}}'
-									class="product_button ml-auto mr-auto trans_200 cartisjs"><a>Add to
+								<button id='p_id{{every.id}}'
+									class="product_button ml-auto mr-auto trans_200 cartisjs"><a href="{% url 'update_cart' every.id %}">Add to
 										cart</a></button>
 
 							</div>
