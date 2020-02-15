@@ -59,17 +59,17 @@
 								</li>
 
 								{% else %}
-								{% for items in cart.products.all %}
+								{% for items in cart.cartitem_set.all %}
 								<li class="cart_item item_list d-flex flex-lg-row flex-column align-items-lg-center
 									align-items-start justify-content-start">
 									<div
 										class="product d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start">
+										{% for image in items.product.productimage_set.all %}
 										<div>
-											{% for image in items.productimage_set.all %}
 											<div class="product_image"><img src="/media/{{image.image}}" alt="">
 											</div>
 										</div>
-										<div class="product_name"><a href="product">{{ items.product_name }}</a>
+										<div class="product_name"><a href="product">{{ items.product.product_name }}</a>
 										</div>
 									</div>
 									<div class="product_color text-lg-center product_text"><span>Color:
@@ -77,10 +77,10 @@
 									<div class="product_size text-lg-center product_text"><span>Size: </span>One
 										Size</div>
 									<div class="product_price text-lg-center product_text"><span>Price:
-										</span>${{ items.price }}</div>
+										</span>${{ items.product.price }}</div>
 									<div class="product_quantity_container">
 										<div class="product_quantity ml-lg-auto mr-lg-auto text-center">
-											<span class="product_text product_num">{{ cart.quantity }}</span>
+											<span class="product_text product_num">{{ items.quantity }}</span>
 											<div class="qty_sub qty_button trans_200 text-center"><span id='sub_qty' data-id='quantity_{{ items.id }}'>-</span>
 											</div>
 											<div class="qty_add qty_button trans_200 text-center"><span>+</span>

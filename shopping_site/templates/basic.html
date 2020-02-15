@@ -13,7 +13,7 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.theme.default.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/animate.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'styles/style.css' %}">
 	{% block head %}
 	{% endblock %}
 </head>
@@ -112,7 +112,7 @@
 					<div class="cart d-flex flex-row align-items-center justify-content-start">
 						<div class="cart_icon"><a href="cart">
 								<img src="{% static 'images/bag.png' %}" alt="">
-								<div class="cart_num"><span class="cartisjs"></span></div>
+								<div class="cart_num"><span class="cartisjs">{{ request.session.items_count }}</span></div>
 							</a></div>
 					</div>
 
@@ -318,7 +318,7 @@
 			<div class="cart d-flex flex-row align-items-center justify-content-start">
 				<div class="cart_icon"><a href="cart">
 						<img src="{% static 'images/bag.png' %}" alt="">
-						<div class="cart_num"><span id='checkout_cart' class="cartisjs" ></span></div>
+						<div class="cart_num"><span id='checkout_cart' class="cartisjs" >{{ request.session.items_count }}</span></div>
 					</a></div>
 				<div class="cart_text">bag</div>
 				<a class="cart_price">$39.99 (<span id='checkout_cart'></span>)</a>
