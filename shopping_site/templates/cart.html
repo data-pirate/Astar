@@ -43,7 +43,7 @@
 								<li>Size</li>
 								<li>Price</li>
 								<li>Quantity</li>
-								<li>Total</li>
+								<!-- <li>Total</li> -->
 							</ul>
 						</div>
 
@@ -52,6 +52,13 @@
 							<ul class="cart_items_list">
 
 								<!-- Cart Item -->
+								{% if empty %}
+								<li class="cart_item item_list d-flex flex-lg-row flex-column align-items-lg-center
+									align-items-start justify-content-start">
+								<h1 class="col-lg-12 col-sm-6">Your cart is Empty</h1>
+								</li>
+
+								{% else %}
 								{% for items in cart.products.all %}
 								<li class="cart_item item_list d-flex flex-lg-row flex-column align-items-lg-center
 									align-items-start justify-content-start">
@@ -73,19 +80,20 @@
 										</span>${{ items.price }}</div>
 									<div class="product_quantity_container">
 										<div class="product_quantity ml-lg-auto mr-lg-auto text-center">
-											<span class="product_text product_num">1</span>
-											<div class="qty_sub qty_button trans_200 text-center"><span id='quantity_{{ items.id }}'>-</span>
+											<span class="product_text product_num">{{ cart.quantity }}</span>
+											<div class="qty_sub qty_button trans_200 text-center"><span id='sub_qty' data-id='quantity_{{ items.id }}'>-</span>
 											</div>
 											<div class="qty_add qty_button trans_200 text-center"><span>+</span>
 											</div>
 										</div>
 									</div>
-									<div class="product_total text-lg-center product_text">
-										<span>Total:</span>${{ cart.total }}</div>
+									<div class="delete_icon text-lg-center">
+										<a href="{% url 'delete_from_cart' items.id %}"><img src="{% static 'images/delete.png' %}" alt=""></a></div>
 
 								</li>
 								{% endfor %}
 								{% endfor %}
+								{% endif %}
 							</ul>
 						</div>
 
