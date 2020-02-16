@@ -149,7 +149,7 @@
 						<div class="product grid-item hot">
 							<div class="product_inner">
 								{% for each in every.productimage_set.all %}
-								<a href="/product/{{ each.id }}">
+								<a href="{% url 'products' each.id every.product_name %}">
 									<div class="product_image">
 										<img src="/media/{{each.image}}" alt="">
 										{% if each.featured == True %}
@@ -157,7 +157,7 @@
 										{% endif %}
 									</div>
 									<div class="product_content text-center">
-										<div class="product_title"><a href="product/{{each.id}}">{{ every.product_name }}</a></div>
+										<div class="product_title"><a href="{% url 'products' each.id every.product_name %}">{{ every.product_name }}</a></div>
 										<div class="product_price">${{ every.price }}</div>
 								</a>
 								{% endfor %}

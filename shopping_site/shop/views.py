@@ -29,10 +29,12 @@ def cart(request):
 def checkout(request):
     return render(request, 'checkout.html')
 
-def product(request, id_of_prod):
-    product = Product.objects.filter(id=id_of_prod)
-    
-    return render(request, 'product.html', {'product': product[0]})
+def product(request, id, name):
+    product = Product.objects.get(id=id)
+    return render(request, 'product.html', {'product': product})
 
 def categories(request):
     return render(request, 'categories.html')
+
+def signup(request):
+    return render(request, 'signup.html')

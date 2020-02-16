@@ -1,0 +1,42 @@
+@charset "utf-8";
+
+
+.product_delete
+{
+	padding-left: 50px;
+}
+.product_delete a
+{
+	font-family: 'Poppins', sans-serif;
+	font-size: 24px;
+	color: #414141;
+	font-weight: 600;
+	-webkit-transition: all 200ms ease;
+	-moz-transition: all 200ms ease;
+	-ms-transition: all 200ms ease;
+	-o-transition: all 200ms ease;
+	transition: all 200ms ease;
+}
+.product_delete a:hover
+{
+	color: #da2828;
+}
+
+/*
+    delete logo
+*/
+
+.delete_icon
+{
+	width: 32px;
+	height: 65px;
+}
+.delete_icon a
+{
+	display: block;
+	position: relative;
+}
+.delte_icon a img
+{
+	max-width: 100%;
+}

@@ -6,8 +6,9 @@ from .models import Product, ProductImage
 class ProductAdmin(admin.ModelAdmin):
     search_fields = ['product_name', 'desc']
     list_display = ['product_name','category','price','date', 'instock']
-    list_editable = ['price']
+    list_editable = ['price','instock']
     list_filter = ['price']
+    prepopulated_fields = {'desc':('product_name',)}
     class meta:
         model = Product
 
