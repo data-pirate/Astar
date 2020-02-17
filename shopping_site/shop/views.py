@@ -41,3 +41,6 @@ def signup(request):
 
 def login(request):
     return render(request, 'login.html')
+
+def forgot_password(request):
+    return render(request, 'forgot_password.html')
