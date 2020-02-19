@@ -39,6 +39,15 @@ def categories(request):
 def signup(request):
     return render(request, 'signup.html')
 
+def handle_signup(request):
+    if request.method == 'POST':
+        fullname = request.POST['reg_fullname']
+        username = request.POST['reg_username']
+        email = request.POST['reg_email']
+        password = request.POST['reg_password']
+        confirm_password = request.POST['reg_password_confirm']
+        gender = request.POST['reg_gender']
+        print(fullname, username, email, gender, password, confirm_password)       
 def login(request):
     return render(request, 'login.html')
 

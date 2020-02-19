@@ -329,17 +329,26 @@
 
         <!-- Home -->
         {% block body %}
-        <div class="text-center" style="padding:100px 0;">
+        <div class="text-center">
             <div class="logo">register</div>
             <!-- Main Form -->
             <div class="login-form-1">
-                <form id="register-form" class="text-left">
+                <form action="/handle_signup" method="POST" id="register-form" class="text-left">
+                    {% csrf_token %}
                     <div class="login-form-main-message"></div>
                     <div class="main-login-form">
                         <div class="login-group">
                             <div class="form-group">
-                                <label for="reg_username" class="sr-only">Email address</label>
+                                <label for="reg_fullname" class="sr-only">Full Name</label>
+                                <input type="text" class="input_field form-control" id="reg_fullname" name="reg_fullname" placeholder="full name">
+                            </div>
+                            <div class="form-group">
+                                <label for="reg_username" class="sr-only">Username</label>
                                 <input type="text" class="input_field form-control" id="reg_username" name="reg_username" placeholder="username">
+                            </div>
+                            <div class="form-group">
+                                <label for="reg_email" class="sr-only">Email address</label>
+                                <input type="text" class="input_field form-control" id="reg_email" name="reg_email" placeholder="example@xyz.com">
                             </div>
                             <div class="form-group">
                                 <label for="reg_password" class="sr-only">Password</label>
@@ -350,17 +359,8 @@
                                 <input type="password" class="input_field form-control" id="reg_password_confirm" name="reg_password_confirm" placeholder="confirm password">
                             </div>
                             
-                            <div class="form-group">
-                                <label for="reg_email" class="sr-only">Email</label>
-                                <input type="text" class="input_field form-control" id="reg_email" name="reg_email" placeholder="email">
-                            </div>
-                            <div class="form-group">
-                                <label for="reg_fullname" class="sr-only">Full Name</label>
-                                <input type="text" class="input_field form-control" id="reg_fullname" name="reg_fullname" placeholder="full name">
-                            </div>
-                            
                             <div class="form-group login-group-checkbox">
-                                <input type="radio" class="" name="reg_gender" id="male" placeholder="username">
+                                <input type="radio" class="" name="reg_gender" id="male" placeholder="username" checked>
                                 <label for="male">male</label>
                                 
                                 <input type="radio" class="" name="reg_gender" id="female" placeholder="username">
