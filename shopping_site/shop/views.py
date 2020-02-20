@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
+from django.contrib.auth.models import auth
 from .models import Product
 
 # Create your views here.
@@ -47,9 +49,32 @@ def handle_signup(request):
         password = request.POST['reg_password']
         confirm_password = request.POST['reg_password_confirm']
         gender = request.POST['reg_gender']
-        print(fullname, username, email, gender, password, confirm_password)       
+        if password == confirm_password:
+            try:
+                user = User.objects.get(username=username)
+                return render(request, 'signup.html', {'error': True, 'message': 'Username already exists'})
+            except:
+                user = User.objects.create_user(username=username, password=password)
+                return redirect('login')
+        else:
+            return render(request, 'signup.html', {'error': True, 'message': 'Passwords don\'t match'})    
+    else:
+        return render(request, 'signup.html', {'error': True, 'message': 'Something went Wrong ! please try again'})    
+
 def login(request):
     return render(request, 'login.html')
-
+def handle_login(request):
+    if request.method == 'POST':
+        username = request.POST['lg_username']
+        password = request.POST['lg_password']
+        remember = request.POST['lg_remember']
+        if not remember:
+            remember = 'off'
+        user = auth.authenticate(username=username, password=password)
+        if not user is None:
+            auth.login(request, user)
+            return redirect('index')
+        else:
+            return render(request, 'login.html', {'error': True, 'message': 'Invalid  Credentials'})
 def forgot_password(request):
     return render(request, 'forgot_password.html')
