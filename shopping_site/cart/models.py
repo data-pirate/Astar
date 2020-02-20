@@ -1,5 +1,6 @@
 from shop.models import Product
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -24,3 +25,11 @@ class Cart(models.Model):
 
     def __str__(self):
         return str(self.id)
+
+class Orders(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    items = models.CharField(max_length=1000)
+    email = models.CharField(max_length=1000)
+    address = models.CharField(max_length=1000)
+    city = models.CharField(max_length=1000)
+    zip_code = models.CharField(max_length=1000)

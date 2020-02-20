@@ -16,12 +16,13 @@
     <link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'styles/style.css' %}">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 </head>
 
 <body>
 
     <div class="super_container">
-
         <!-- Header -->
 
         <header class="header">
@@ -40,7 +41,7 @@
                 <!-- Navigation -->
                 <nav class="header_nav">
                     <ul class="d-flex flex-row align-items-center justify-content-start">
-                        <li><a href="">home</a></li>
+                        <li><a href="{% url 'index' %}">home</a></li>
                         <li><a href="#">woman</a></li>
                         <li><a href="#">man</a></li>
                         <li><a href="#">lookbook</a></li>
@@ -201,7 +202,7 @@
             </div>
             <nav class="menu_nav">
                 <ul class="menu_mm">
-                    <li class="menu_mm"><a href="/">home</a></li>
+                    <li class="menu_mm"><a href="{% url 'index' %}">home</a></li>
                     <li class="menu_mm"><a href="#">woman</a></li>
                     <li class="menu_mm"><a href="#">man</a></li>
                     <li class="menu_mm"><a href="#">lookbook</a></li>
@@ -340,33 +341,37 @@
                         <div class="login-group">
                             <div class="form-group">
                                 <label for="reg_fullname" class="sr-only">Full Name</label>
-                                <input type="text" class="input_field form-control" id="reg_fullname" name="reg_fullname" placeholder="full name">
+                                <input type="text" class="input_field form-control" id="reg_fullname"
+                                    name="reg_fullname" placeholder="full name">
                             </div>
                             <div class="form-group">
                                 <label for="reg_username" class="sr-only">Username</label>
-                                <input type="text" class="input_field form-control" id="reg_username" name="reg_username" placeholder="username">
+                                <input type="text" class="input_field form-control" id="reg_username"
+                                    name="reg_username" placeholder="username">
                             </div>
                             <div class="form-group">
                                 <label for="reg_email" class="sr-only">Email address</label>
-                                <input type="text" class="input_field form-control" id="reg_email" name="reg_email" placeholder="example@xyz.com">
+                                <input type="text" class="input_field form-control" id="reg_email" name="reg_email"
+                                    placeholder="example@xyz.com">
                             </div>
                             <div class="form-group">
                                 <label for="reg_password" class="sr-only">Password</label>
-                                <input type="password" class="input_field form-control" id="reg_password" name="reg_password" placeholder="password">
+                                <input type="password" class="input_field form-control" id="reg_password"
+                                    name="reg_password" placeholder="password">
                             </div>
                             <div class="form-group">
                                 <label for="reg_password_confirm" class="sr-only">Password Confirm</label>
-                                <input type="password" class="input_field form-control" id="reg_password_confirm" name="reg_password_confirm" placeholder="confirm password">
+                                <input type="password" class="input_field form-control" id="reg_password_confirm"
+                                    name="reg_password_confirm" placeholder="confirm password">
                             </div>
-                            
+
                             <div class="form-group login-group-checkbox">
                                 <input type="radio" class="" name="reg_gender" id="male" placeholder="username" checked>
                                 <label for="male">male</label>
-                                
                                 <input type="radio" class="" name="reg_gender" id="female" placeholder="username">
                                 <label for="female">female</label>
                             </div>
-                            
+
                             <div class="form-group login-group-checkbox">
                                 <input type="checkbox" class="" id="reg_agree" name="reg_agree">
                                 <label for="reg_agree">i agree with <a href="#">terms</a></label>
@@ -381,8 +386,7 @@
             </div>
             <!-- end:Main Form -->
         </div>
-        {% endblock %}        
-        <!-- REGISTRATION FORM -->
+        {% endblock %}
 
         <!-- Footer -->
 

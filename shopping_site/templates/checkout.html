@@ -16,7 +16,7 @@
 			<div class="home_title">Checkout</div>
 			<div class="breadcrumbs">
 				<ul class="d-flex flex-row align-items-center justify-content-start">
-					<li><a href="index.html">Home</a></li>
+					<li><a href="{% url 'index' %}">Home</a></li>
 					<li><a href="cart.html">Your Cart</a></li>
 					<li>Checkout</li>
 				</ul>
@@ -61,14 +61,18 @@
 									</div>
 									<div>
 										<!-- Country -->
-										<label for="checkout_country">Country*</label>
-										<select name="checkout_country" id="checkout_country"
-											class="dropdown_item_select checkout_input" require="required">
-											<option></option>
-											<option>Lithuania</option>
-											<option>Sweden</option>
-											<option>UK</option>
-											<option>Italy</option>
+										<label for="country">Country*</label>
+										<select name="country" id="countryId"
+											class="dropdown_item_select checkout_input countries order-alpha" require="required">
+											<option value="">Select Country...</option>
+										</select>
+									</div>
+									<div>
+										<!-- State -->
+										<label for="state">State*</label>
+										<select name="state" id="stateId" class="dropdown_item_select checkout_input states order-alpha"
+											require="required">
+											<option value="">Select State...</option>
 										</select>
 									</div>
 									<div>
@@ -87,26 +91,10 @@
 									</div>
 									<div>
 										<!-- City / Town -->
-										<label for="checkout_city">City/Town*</label>
-										<select name="checkout_city" id="checkout_city"
-											class="dropdown_item_select checkout_input" require="required">
-											<option></option>
-											<option>City</option>
-											<option>City</option>
-											<option>City</option>
-											<option>City</option>
-										</select>
-									</div>
-									<div>
-										<!-- Province -->
-										<label for="checkout_province">Province*</label>
-										<select name="checkout_province" id="checkout_province"
-											class="dropdown_item_select checkout_input" require="required">
-											<option></option>
-											<option>Province</option>
-											<option>Province</option>
-											<option>Province</option>
-											<option>Province</option>
+										<label for="city">City/Town*</label>
+										<select name="city" id="cityId" class="dropdown_item_select checkout_input cities order-alpha"
+											require="required">
+											<option value="">Select city...</option>
 										</select>
 									</div>
 									<div>
@@ -156,7 +144,6 @@
 								</form>
 							</div>
 						</div>
-
 						<!-- Cart Total -->
 						<div class="cart_total">
 							<div class="cart_total_inner checkout_box">
@@ -183,7 +170,7 @@
 											<input type="radio" name="radio">
 											<span class="checkmark"></span>
 										</label>
-										<label class="payment_option clearfix">Cach on delivery
+										<label class="payment_option clearfix">Cash on delivery
 											<input type="radio" name="radio">
 											<span class="checkmark"></span>
 										</label>
@@ -218,4 +205,5 @@
 
 {% block js %}
 <script src="{% static 'js/checkout.js' %}"></script>
+<script src="https://geodata.solutions/includes/countrystatecity.js"></script>
 {% endblock %}

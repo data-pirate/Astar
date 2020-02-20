@@ -13,6 +13,8 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.theme.default.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/animate.css' %}">
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 	<link rel="stylesheet" type="text/css" href="{% static 'styles/style.css' %}">
 	{% block head %}
 	{% endblock %}
@@ -40,11 +42,11 @@
 				<!-- Navigation -->
 				<nav class="header_nav">
 					<ul class="d-flex flex-row align-items-center justify-content-start">
-						<li><a href="">home</a></li>
-						<li><a href="#">woman</a></li>
-						<li><a href="#">man</a></li>
-						<li><a href="#">lookbook</a></li>
-						<li><a href="#">blog</a></li>
+						<li><a href="{% url 'index' %}">home</a></li>
+						<li><a href="{% url 'category' %}">woman</a></li>
+						<li><a href="{% url 'category' %}">man</a></li>
+						<li><a href="{% url 'category' %}">lookbook</a></li>
+						<li><a href="{% url 'blog' %}">blog</a></li>
 						<li><a href="#">contact</a></li>
 					</ul>
 				</nav>
@@ -112,7 +114,8 @@
 					<div class="cart d-flex flex-row align-items-center justify-content-start">
 						<div class="cart_icon"><a href="cart">
 								<img src="{% static 'images/bag.png' %}" alt="">
-								<div class="cart_num"><span class="cartisjs">{{ request.session.items_count }}</span></div>
+								<div class="cart_num"><span class="cartisjs">{{ request.session.items_count }}</span>
+								</div>
 							</a></div>
 					</div>
 
@@ -200,12 +203,12 @@
 			</div>
 			<nav class="menu_nav">
 				<ul class="menu_mm">
-					<li class="menu_mm"><a href="/">home</a></li>
-					<li class="menu_mm"><a href="#">woman</a></li>
-					<li class="menu_mm"><a href="#">man</a></li>
-					<li class="menu_mm"><a href="#">lookbook</a></li>
-					<li class="menu_mm"><a href="blog">blog</a></li>
-					<li class="menu_mm"><a href="contact">contact</a></li>
+					<li class="menu_mm"><a href="{% url 'index' %}">home</a></li>
+					<li class="menu_mm"><a href="{% url 'category' %}">woman</a></li>
+					<li class="menu_mm"><a href="{% url 'category' %}">man</a></li>
+					<li class="menu_mm"><a href="{% url 'category' %}">lookbook</a></li>
+					<li class="menu_mm"><a href="{% url 'blog' %}">blog</a></li>
+					<li class="menu_mm"><a href="#">contact</a></li>
 				</ul>
 			</nav>
 			<div class="menu_extra">
@@ -297,11 +300,11 @@
 			<!-- Sidebar Navigation -->
 			<nav class="sidebar_nav">
 				<ul>
-					<li><a href="">home<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-					<li><a href="#">woman<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-					<li><a href="#">man<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+					<li><a href="{% url 'index' %}">home<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+					<li><a href="{% url 'category' %}">woman<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+					<li><a href="{% url 'category' %}">man<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
 					<li><a href="#">lookbook<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-					<li><a href="blog">blog<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+					<li><a href="{% url 'blog' %}">blog<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
 					<li><a href="#">contact<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
 				</ul>
 			</nav>
@@ -318,7 +321,8 @@
 			<div class="cart d-flex flex-row align-items-center justify-content-start">
 				<div class="cart_icon"><a href="cart">
 						<img src="{% static 'images/bag.png' %}" alt="">
-						<div class="cart_num"><span id='checkout_cart' class="cartisjs" >{{ request.session.items_count }}</span></div>
+						<div class="cart_num"><span id='checkout_cart'
+								class="cartisjs">{{ request.session.items_count }}</span></div>
 					</a></div>
 				<div class="cart_text">bag</div>
 				<a class="cart_price">$39.99 (<span id='checkout_cart'></span>)</a>
@@ -420,7 +424,8 @@
 										<!-- Blog Item -->
 										<div
 											class="footer_blog_item d-flex flex-row align-items-start justify-content-start">
-											<div class="footer_blog_image"><a href="blog"><img src="{% static 'images/footer_blog_1.jpg' %}" alt=""></a></div>
+											<div class="footer_blog_image"><a href="blog"><img
+														src="{% static 'images/footer_blog_1.jpg' %}" alt=""></a></div>
 											<div class="footer_blog_content">
 												<div class="footer_blog_title"><a href="blog">what shoes to
 														wear</a></div>
@@ -492,15 +497,6 @@
 											<div class="footer_social_icon"><i class="fa fa-instagram"
 													aria-hidden="true"></i></div>
 											<div class="footer_social_title">instagram</div>
-										</div>
-									</a>
-									<!-- Google + -->
-									<a href="#">
-										<div
-											class="footer_social_item d-flex flex-row align-items-center justify-content-start">
-											<div class="footer_social_icon"><i class="fa fa-google-plus"
-													aria-hidden="true"></i></div>
-											<div class="footer_social_title">google +</div>
 										</div>
 									</a>
 									<!-- Pinterest -->
@@ -591,6 +587,7 @@
 	<script src="{% static 'plugins/parallax-js-master/parallax.min.js' %}"></script>
 	<script src="{% static 'plugins/Isotope/isotope.pkgd.min.js' %}"></script>
 	<script src="{% static 'plugins/Isotope/fitcolumns.js' %}"></script>
+	<script src="{% static 'js/custom.js' %}"></script>
 	<!-- <script>
 		/* 
 	
