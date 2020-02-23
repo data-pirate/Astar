@@ -18,9 +18,9 @@
 			<div class="breadcrumbs">
 				<ul class="d-flex flex-row align-items-center justify-content-start">
 					<li><a href="index.html">Home</a></li>
-					<li><a href="categories.html">Woman</a></li>
-					<li><a href="categories.html">Accessories</a></li>
-					<li>Shoulder Bag</li>
+					<li><a href="categories.html">{{ object.get_category_display }}</a></li>
+					<li><a href="categories.html">{{ object.get_sub_category_display }}</a></li>
+					<li>{{ object.title }}</li>
 				</ul>
 			</div>
 		</div>
@@ -82,11 +82,24 @@
 											src="{% static 'images/product_single_5.jpg' %}" alt=""></div>
 								</div>
 							</div>
+							<div>
+								<h1 class="p-2">product description:</h1>
+							<h3 style="color: #414b56;" class="mx-4 px-2 py-2">
+								{{ object.description }}
+							</h3>
+						</div>
 						</div>
 						<div class="product_sidebar order-lg-2 order-1">
 							<form action="#" id="product_form" class="product_form">
-								<div class="product_name">{{product.product_name}}</div>
-								<div class="product_price">${{product.price}}</div>
+								<div class="product_name">{{ object.title }}</div>
+								{% if object.discount_price %}
+								<div class="product_price">${{ object.discount_price }}
+									<span><del
+											style="font-size: medium; opacity: 0.50; ">${{ object.price }}</del></span>
+								</div>
+								{% else %}
+								<div class="product_price">${{ object.price }}</div>
+								{% endif %}
 								<div class="product_color">Color: <span>Brown</span></div>
 								<div class="product_size">
 									<div class="product_size_title">Select Size</div>
@@ -125,7 +138,19 @@
 										</ul>
 									</div>
 								</div>
-								<button class="cart_button trans_200">add to cart</button>
+								{% if messages %}
+								{% for message in messages %}
+								<div class="mt-2 alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+									{{ message }}
+									{{ message.tag }}
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									  <span aria-hidden="true">&times;</span>
+									</button>
+								  </div>
+								{% endfor %}
+								{% endif %}
+								<button class="cart_button trans_200"><a href="{{ object.get_cart_url }}">add to cart</a></button>
+								<button class="delete_cart_button trans_200"><a href="{{ object.remove_from_cart_url }}">remove from cart</a></button>
 								<div class="similar_products_button trans_200"><a href="/categories">see similar
 										products</a></div>
 							</form>

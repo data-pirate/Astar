@@ -145,24 +145,27 @@
 					<div class="products_container grid">
 
 						<!-- Product -->
-						{% for every in product %}
-						<div class="product grid-item hot">
+						{% for every in object_list %}
+						<div class="product grid-item {{ every.get_label_display }}">
 							<div class="product_inner">
-								{% for each in every.productimage_set.all %}
-								<a href="{% url 'products' each.id every.product_name %}">
+								<a href="{{ every.get_absolute_url }}">
 									<div class="product_image">
 										<img src="/media/{{each.image}}" alt="">
-										{% if each.featured == True %}
-										    <div class="product_tag">hot</div>
-										{% endif %}
+										    <div class="product_tag">{{ every.get_label_display }}</div>
 									</div>
 									<div class="product_content text-center">
-										<div class="product_title"><a href="{% url 'products' each.id every.product_name %}">{{ every.product_name }}</a></div>
+										<div class="product_title"><a href="{{ every.get_absolute_url }}">{{ every.title }}</a></div>
+										{% if every.discount_price %}
+										<div class="product_price">${{ every.discount_price }}
+										<span><del>${{ every.price }}</del></span>
+										</div>
+										{% else %}
 										<div class="product_price">${{ every.price }}</div>
+										{% endif %}
+
 								</a>
-								{% endfor %}
 								<button id='p_id{{every.id}}'
-									class="product_button ml-auto mr-auto trans_200 cartisjs"><a href="{% url 'update_cart' every.id %}">Add to
+									class="product_button ml-auto mr-auto trans_200"><a href="{{ every.get_cart_url }}">Add to
 										cart</a></button>
 
 							</div>
