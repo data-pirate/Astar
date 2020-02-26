@@ -1,4 +1,4 @@
-{% extends 'basic.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
 {% block head %}
@@ -6,7 +6,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}">
 {% endblock %}
 
-{% block body %}
+{% block content %}
 <div class="home">
 
 	<!-- Home Slider -->
@@ -80,6 +80,18 @@
 </div>
 
 <!-- Boxes -->
+{% if messages %}
+{% for message in messages %}
+<div class="mt-2 alert alert-{{ message.tags }} alert-dismissible fade show"
+	role="alert">
+	{{ message }}
+	{{ message.tag }}
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		<span aria-hidden="true">&times;</span>
+	</button>
+</div>
+{% endfor %}
+{% endif %}
 
 <div class="boxes">
 	<div class="section_container">
@@ -151,22 +163,20 @@
 								<a href="{{ every.get_absolute_url }}">
 									<div class="product_image">
 										<img src="/media/{{each.image}}" alt="">
-										    <div class="product_tag">{{ every.get_label_display }}</div>
+										<div class="product_tag">{{ every.get_label_display }}</div>
 									</div>
 									<div class="product_content text-center">
-										<div class="product_title"><a href="{{ every.get_absolute_url }}">{{ every.title }}</a></div>
+										<div class="product_title"><a
+												href="{{ every.get_absolute_url }}">{{ every.title }}</a></div>
 										{% if every.discount_price %}
 										<div class="product_price">${{ every.discount_price }}
-										<span><del>${{ every.price }}</del></span>
+											<span><del>${{ every.price }}</del></span>
 										</div>
 										{% else %}
 										<div class="product_price">${{ every.price }}</div>
 										{% endif %}
 
 								</a>
-								<button id='p_id{{every.id}}'
-									class="product_button ml-auto mr-auto trans_200"><a href="{{ every.get_cart_url }}">Add to
-										cart</a></button>
 
 							</div>
 						</div>
@@ -175,11 +185,32 @@
 				</div>
 			</div>
 		</div>
+		<!-- PAGINATION -->
+		{% if is_paginated %}
+		<nav class="pagination-container">
+			<div class="pagination">
+				{% if page_obj.has_previous %}
+				<a class="pagination-newer" href="?page={{ page_obj.previous_page_number }}">PREV</a>
+				{% endif %}
+				<span class="pagination-inner">
+					<a href="#">1</a>
+					<a class="pagination-active" href="#">2</a>
+					<a href="#">3</a>
+					<a href="#">4</a>
+					<a href="#">5</a>
+					<a href="#">6</a>
+				</span>
+				{% if page_obj.has_next %}
+				<a class="pagination-older" href="?page={{ page_obj.next_page_number }}">NEXT</a>
+				{% endif %}
+			</div>
+		</nav>
+		{% endif %}
 	</div>
-</div>
 </div>
 {% endblock %}
 
 {% block js %}
 <script src="{% static 'js/custom.js' %}"></script>
+<script src="{% static 'js/customized.js' %}"></script>
 {% endblock %}

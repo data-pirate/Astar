@@ -1,11 +1,11 @@
-{% extends 'basic.html' %}
+{% extends 'base.html' %}
 {% load static %}
 {% block head %}
 <link rel="stylesheet" type="text/css" href="{% static 'styles/checkout.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'styles/checkout_responsive.css' %}">
 {% endblock %}
 
-{% block body %}
+{% block content %}
 <!-- Home -->
 
 <div class="home">
@@ -16,7 +16,7 @@
 			<div class="home_title">Checkout</div>
 			<div class="breadcrumbs">
 				<ul class="d-flex flex-row align-items-center justify-content-start">
-					<li><a href="{% url 'index' %}">Home</a></li>
+					<li><a href="index">Home</a></li>
 					<li><a href="cart.html">Your Cart</a></li>
 					<li>Checkout</li>
 				</ul>
@@ -26,7 +26,6 @@
 </div>
 
 <!-- Checkout -->
-
 <div class="checkout">
 	<div class="section_container">
 		<div class="container">
@@ -44,33 +43,33 @@
 										<div class="col-lg-6">
 											<!-- Name -->
 											<label for="checkout_name">First Name*</label>
-											<input type="text" id="checkout_name" class="checkout_input"
-												required="required">
+											{{ form.first_name }}
 										</div>
 										<div class="col-lg-6">
 											<!-- Last Name -->
 											<label for="checkout_last_name">Last Name*</label>
-											<input type="text" id="checkout_last_name" class="checkout_input"
-												required="required">
+											{{ form.last_name }}
 										</div>
 									</div>
 									<div>
 										<!-- Company -->
 										<label for="checkout_company">Company</label>
-										<input type="text" id="checkout_company" class="checkout_input">
+										{{ form.company }}
 									</div>
 									<div>
 										<!-- Country -->
 										<label for="country">Country*</label>
 										<select name="country" id="countryId"
-											class="dropdown_item_select checkout_input countries order-alpha" require="required">
+											class="dropdown_item_select checkout_input countries order-alpha"
+											require="required">
 											<option value="">Select Country...</option>
 										</select>
 									</div>
 									<div>
 										<!-- State -->
 										<label for="state">State*</label>
-										<select name="state" id="stateId" class="dropdown_item_select checkout_input states order-alpha"
+										<select name="state" id="stateId"
+											class="dropdown_item_select checkout_input states order-alpha"
 											require="required">
 											<option value="">Select State...</option>
 										</select>
@@ -78,44 +77,31 @@
 									<div>
 										<!-- Address -->
 										<label for="checkout_address">Address*</label>
-										<input type="text" id="checkout_address" class="checkout_input"
-											required="required">
-										<input type="text" id="checkout_address_2"
-											class="checkout_input checkout_address_2" required="required">
+										{{ form.address1 }}
+
+										{{ form.address2 }}
 									</div>
 									<div>
 										<!-- Zipcode -->
 										<label for="checkout_zipcode">Zipcode*</label>
-										<input type="text" id="checkout_zipcode" class="checkout_input"
-											required="required">
-									</div>
-									<div>
-										<!-- City / Town -->
-										<label for="city">City/Town*</label>
-										<select name="city" id="cityId" class="dropdown_item_select checkout_input cities order-alpha"
-											require="required">
-											<option value="">Select city...</option>
-										</select>
+										{{ form.zip_code }}
 									</div>
 									<div>
 										<!-- Phone no -->
 										<label for="checkout_phone">Phone no*</label>
-										<input type="phone" id="checkout_phone" class="checkout_input"
-											required="required">
+										{{ form.phone }}
 									</div>
 									<div>
 										<!-- Email -->
 										<label for="checkout_email">Email Address*</label>
-										<input type="phone" id="checkout_email" class="checkout_input"
-											required="required">
+										{{ form.email }}
 									</div>
 									<div class="checkout_extra">
 										<ul>
 											<li
 												class="billing_info d-flex flex-row align-items-center justify-content-start">
 												<label class="checkbox_container">
-													<input type="checkbox" id="cb_1" name="billing_checkbox"
-														class="billing_checkbox">
+													{{ form.terms }}
 													<span class="checkbox_mark"></span>
 													<span class="checkbox_text">Terms and conditions</span>
 												</label>
@@ -123,17 +109,7 @@
 											<li
 												class="billing_info d-flex flex-row align-items-center justify-content-start">
 												<label class="checkbox_container">
-													<input type="checkbox" id="cb_2" name="billing_checkbox"
-														class="billing_checkbox">
-													<span class="checkbox_mark"></span>
-													<span class="checkbox_text">Create an account</span>
-												</label>
-											</li>
-											<li
-												class="billing_info d-flex flex-row align-items-center justify-content-start">
-												<label class="checkbox_container">
-													<input type="checkbox" id="cb_3" name="billing_checkbox"
-														class="billing_checkbox">
+													{{ form.newsletter }}
 													<span class="checkbox_mark"></span>
 													<span class="checkbox_text">Subscribe to our
 														newsletter</span>
@@ -141,7 +117,6 @@
 											</li>
 										</ul>
 									</div>
-								</form>
 							</div>
 						</div>
 						<!-- Cart Total -->
@@ -190,10 +165,12 @@
 									Proin pharetra temp or so dales. Phasellus sagittis auctor gravida. Integ er
 									bibendum sodales arcu id te mpus. Ut consectetur lacus.</div>
 
-								<div class="checkout_button trans_200"><a href="checkout.html">place order</a>
+								<button type='submit' class="checkout_button trans_200"><a>place order</a></button>
 								</div>
 							</div>
 						</div>
+						</form>
+
 
 					</div>
 				</div>

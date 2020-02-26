@@ -1,23 +1,22 @@
-{% extends 'basic.html' %}
+{% extends 'base.html' %}
 {% load static %}
 {% block head %}
 <link rel="stylesheet" type="text/css" href="{% static 'styles/cart.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'styles/cart_responsive.css' %}">
 {% endblock %}
 
-{% block body %}
-
+{% block content %}
 <!-- Home -->
 
 <div class="home">
 	<div class="parallax_background parallax-window" data-parallax="scroll"
-		data-image-src="{% static 'images/product_background.jpg' %}" data-speed="0.8"></div>
+		data-image-src="images/product_background.jpg" data-speed="0.8"></div>
 	<div class="home_container">
 		<div class="home_content">
 			<div class="home_title">Cart</div>
 			<div class="breadcrumbs">
 				<ul class="d-flex flex-row align-items-center justify-content-start">
-					<li><a href="">Home</a></li>
+					<li><a href="index.html">Home</a></li>
 					<li>Your Cart</li>
 				</ul>
 			</div>
@@ -33,7 +32,18 @@
 			<div class="row">
 				<div class="col">
 					<div class="cart_container">
-
+						{% if messages %}
+						{% for message in messages %}
+						<div class="mt-2 alert alert-{{ message.tags }} alert-dismissible fade show"
+							role="alert">
+							{{ message }}
+							{{ message.tag }}
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						{% endfor %}
+						{% endif %}
 						<!-- Cart Bar -->
 						<div class="cart_bar">
 							<ul
@@ -43,55 +53,57 @@
 								<li>Size</li>
 								<li>Price</li>
 								<li>Quantity</li>
-								<!-- <li>Total</li> -->
+								<li>Total</li>
 							</ul>
 						</div>
 
 						<!-- Cart Items -->
 						<div class="cart_items">
 							<ul class="cart_items_list">
+								{% if empty %}
+								<li
+									class="cart_item item_list d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start">
+									<h1 class="text-center">Your Cart Is Empty !!!</h1>
+								</li>
+								{% else %}
+								{% for order_item in object.items.all %}
 
 								<!-- Cart Item -->
-								{% if empty %}
-								<li class="cart_item item_list d-flex flex-lg-row flex-column align-items-lg-center
-									align-items-start justify-content-start">
-								<h1 class="col-lg-12 col-sm-6">Your cart is Empty</h1>
-								</li>
-
-								{% else %}
-								{% for items in cart.cartitem_set.all %}
-								<li class="cart_item item_list d-flex flex-lg-row flex-column align-items-lg-center
-									align-items-start justify-content-start">
+								<li
+									class="cart_item item_list d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start">
 									<div
 										class="product d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start">
-										{% for image in items.product.productimage_set.all %}
 										<div>
-											<div class="product_image"><img src="/media/{{image.image}}" alt="">
-											</div>
+											<div class="product_image"><img src="images/cart_1.jpg" alt=""></div>
 										</div>
-										<div class="product_name"><a href="product">{{ items.product.product_name }}</a>
-										</div>
+										<div class="product_name"><a href="product.html">{{ order_item.item.title }}</a></div>
 									</div>
-									<div class="product_color text-lg-center product_text"><span>Color:
-										</span>Brown</div>
-									<div class="product_size text-lg-center product_text"><span>Size: </span>One
-										Size</div>
-									<div class="product_price text-lg-center product_text"><span>Price:
-										</span>${{ items.product.price }}</div>
+									<div class="product_color text-lg-center product_text"><span>Color: </span>Brown
+									</div>
+									<div class="product_size text-lg-center product_text"><span>Size: </span>One Size
+									</div>
+									{% if order_item.item.discount_price %}
+									<div class="product_price text-lg-center product_text"><span>Price: </span>{{ order_item.item.discount_price}}
+									</div>
+									{% else %}
+									<div class="product_price text-lg-center product_text"><span>Price: </span>{{ order_item.item.price}}
+									</div>
+									{% endif %}
 									<div class="product_quantity_container">
 										<div class="product_quantity ml-lg-auto mr-lg-auto text-center">
-											<span class="product_text product_num">{{ items.quantity }}</span>
-											<div class="qty_sub qty_button trans_200 text-center"><span id='sub_qty' data-id='quantity_{{ items.id }}'>-</span>
-											</div>
-											<div class="qty_add qty_button trans_200 text-center"><span>+</span>
-											</div>
+											<span class="product_text product_num">{{ order_item.quantity}}</span>
+											<div class="qty_sub qty_button trans_200 text-center"><span><a href="{{ order_item.item.remove_single_item_from_cart_url }}">-</a></span></div>
+											<div class="qty_add qty_button trans_200 text-center"><span><a href="{{ order_item.item.single_item_add_to_cart_url }}">+</a></span></div>
 										</div>
 									</div>
-									<div class="delete_icon text-lg-center">
-										<a href="{% url 'delete_from_cart' items.id %}"><img src="{% static 'images/delete.png' %}" alt=""></a></div>
-
+									{% if order_item.item.discount_price %}
+									<div class="product_total text-lg-center product_text"><span>Total: </span>${{ order_item.get_total_discount_price}}
+									</div>
+									{% else %}
+									<div class="product_total text-lg-center product_text"><span>Total: </span>${{ order_item.get_total_price}}
+									</div>
+									{% endif %}
 								</li>
-								{% endfor %}
 								{% endfor %}
 								{% endif %}
 							</ul>
@@ -101,12 +113,12 @@
 						<div class="cart_buttons d-flex flex-row align-items-start justify-content-start">
 							<div
 								class="cart_buttons_inner ml-auto d-flex flex-row align-items-start justify-content-start flex-wrap">
-								<div class="button button_continue trans_200"><a href="/categories">continue
+								<div class="button button_continue trans_200"><a href="/">continue
 										shopping</a></div>
-								<div class="button button_clear trans_200"><a href="/categories">clear
-										cart</a></div>
-								<div class="button button_update trans_200"><a href="/categories">update
-										cart</a></div>
+								<div class="button button_clear trans_200"><a href="categories.html">clear cart</a>
+								</div>
+								<div class="button button_update trans_200"><a href="categories.html">update cart</a>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -177,7 +189,7 @@
 							<ul class="cart_extra_total_list">
 								<li class="d-flex flex-row align-items-center justify-content-start">
 									<div class="cart_extra_total_title">Subtotal</div>
-									<div class="cart_extra_total_value ml-auto">${{ cart.total }}</div>
+									<div class="cart_extra_total_value ml-auto">${{ object.get_total }}</div>
 								</li>
 								<li class="d-flex flex-row align-items-center justify-content-start">
 									<div class="cart_extra_total_title">Shipping</div>
@@ -185,11 +197,10 @@
 								</li>
 								<li class="d-flex flex-row align-items-center justify-content-start">
 									<div class="cart_extra_total_title">Total</div>
-									<div class="cart_extra_total_value ml-auto">${{ cart.total }}</div>
+									<div class="cart_extra_total_value ml-auto">${{ object.get_total }}</div>
 								</li>
 							</ul>
-							<div class="checkout_button trans_200"><a href="checkout">proceed to
-									checkout {{ all_prods }}</a></div>
+							<div class="checkout_button trans_200"><a href="checkout/">proceed to checkout</a></div>
 						</div>
 					</div>
 				</div>

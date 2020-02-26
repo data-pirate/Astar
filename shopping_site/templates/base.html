@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+{% load cart_template_tags %}
 <head>
 	{%load static%}
 	<title>aStar</title>
@@ -112,13 +112,28 @@
 					</div>
 
 					<!-- Cart -->
+					{% if request.user.is_authenticated %}
 					<div class="cart d-flex flex-row align-items-center justify-content-start">
-						<div class="cart_icon"><a href="cart">
+						<div class="cart_icon"><a href="{% url 'shop:cart_summary' %}">
 								<img src="{% static 'images/bag.png' %}" alt="">
-								<div class="cart_num"><span class="cartisjs">{{ request.session.items_count }}</span>
-								</div>
+								<div class="cart_num">{{ request.user|cart_count }}</div>
 							</a></div>
 					</div>
+					{% else %}
+					<div class="cart d-flex flex-row align-items-center justify-content-start">
+						<div class="cart_text"><a href="{% url 'account_login' %}">
+								Login/signup
+						</div>
+						</a>
+					</div>
+					<div class="cart d-flex flex-row align-items-center justify-content-start">
+						<div class="cart_text"><a href="{% url 'account_signup' %}">
+								Signup
+
+						</div>
+						</a>
+					</div>
+					{% endif %}
 
 				</div>
 
@@ -319,47 +334,27 @@
 			</div>
 
 			<!-- Cart -->
+			{% if request.user.is_authenticated %}
 			<div class="cart d-flex flex-row align-items-center justify-content-start">
-				<div class="cart_icon"><a href="cart">
+				<div class="cart_icon"><a href="{% url 'shop:cart_summary' %}">
 						<img src="{% static 'images/bag.png' %}" alt="">
-						<div class="cart_num"><span id='checkout_cart'
-								class="cartisjs">{{ request.session.items_count }}</span></div>
+						<div class="cart_num">{{ request.user|cart_count }}</div>
 					</a></div>
 				<div class="cart_text">bag</div>
-				<a class="cart_price">$39.99 (<span id='checkout_cart'></span>)</a>
+				<a class="cart_price"><span>$ 39.99 </span>({{ request.user|cart_count }})</a>
+			</div>	
+			{% else %}
+			<div class="cart d-flex flex-row align-items-center justify-content-start">
+						<div class="cart_text"><a href="{% url 'account_login' %}">Login</a></div>
+						<div class="cart_text"><a href="{% url 'account_signup' %}">Signup</a></div>
 			</div>
+			{% endif %}
 		</div>
 
 		<!-- Home -->
-		{% block body %}
-
+		{% block content %}
+		
 		{% endblock %}
-
-		<!-- Newsletter -->
-
-		<div class="newsletter">
-			<div class="parallax_background parallax-window" data-parallax="scroll"
-				data-image-src="{% static 'images/newsletter.jpg' %}" data-speed="0.8"></div>
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-8 offset-lg-2">
-						<div class="newsletter_content text-center">
-							<div class="newsletter_title_container">
-								<div class="newsletter_title">subscribe to our newsletter</div>
-								<div class="newsletter_subtitle">we won't spam, we promise!</div>
-							</div>
-							<div class="newsletter_form_container">
-								<form action="#" id="newsletter_form" class="newsletter_form">
-									<input type="email" class="newsletter_input" placeholder="your e-mail here"
-										required="required">
-									<button class="newsletter_button">submit</button>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
 
 		<!-- Footer -->
 
@@ -589,37 +584,6 @@
 	<script src="{% static 'plugins/Isotope/isotope.pkgd.min.js' %}"></script>
 	<script src="{% static 'plugins/Isotope/fitcolumns.js' %}"></script>
 	<script src="{% static 'js/custom.js' %}"></script>
-	<!-- <script>
-		/* 
-	
-	5. Cart Javascript
-	
-	*/
-
-		if (localStorage.getItem('cartisjs') == null) {
-			var cart = {};
-			console.log('working');
-		}
-		else {
-			cart = JSON.parse(localStorage.getItem('cartisjs'));
-		}
-
-		$('.cartisjs').click(function () {
-			console.log('clicked');
-			var id = this.id.toString();
-			if (cart[id] != undefined) {
-				cart[id] = cart[id] + 1;
-			}
-			else {
-				cart[id] = 1;
-			}
-			localStorage.getItem('cart', JSON.stringify(cart));
-			console.log(cart);
-			document.getElementById('checkout_cart').innerHTML = Object.keys(cart).length;
-		});
-
-	</script> -->
-
 	{% block js %}
 
 	{% endblock %}
