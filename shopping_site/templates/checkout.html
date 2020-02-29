@@ -33,12 +33,12 @@
 				<div class="col">
 					<div
 						class="checkout_container d-flex flex-xxl-row flex-column align-items-start justify-content-start">
-
 						<!-- Billing -->
 						<div class="billing checkout_box">
 							<div class="checkout_title">Billing Address</div>
 							<div class="checkout_form_container">
-								<form action="#" id="checkout_form" class="checkout_form">
+								<form method="POST" id="checkout_form" class="checkout_form">
+									{% csrf_token %}
 									<div class="row">
 										<div class="col-lg-6">
 											<!-- Name -->
@@ -59,20 +59,7 @@
 									<div>
 										<!-- Country -->
 										<label for="country">Country*</label>
-										<select name="country" id="countryId"
-											class="dropdown_item_select checkout_input countries order-alpha"
-											require="required">
-											<option value="">Select Country...</option>
-										</select>
-									</div>
-									<div>
-										<!-- State -->
-										<label for="state">State*</label>
-										<select name="state" id="stateId"
-											class="dropdown_item_select checkout_input states order-alpha"
-											require="required">
-											<option value="">Select State...</option>
-										</select>
+										{{ form.country }}
 									</div>
 									<div>
 										<!-- Address -->
@@ -115,6 +102,14 @@
 														newsletter</span>
 												</label>
 											</li>
+											<li
+												class="billing_info d-flex flex-row align-items-center justify-content-start">
+												<label class="checkbox_container">
+													{{ form.save_info }}
+													<span class="checkbox_mark"></span>
+													<span class="checkbox_text">Save Information</span>
+												</label>
+											</li>
 										</ul>
 									</div>
 							</div>
@@ -140,24 +135,15 @@
 
 								<!-- Payment Options -->
 								<div class="payment">
+									{% for value, name in form.fields.method_of_payment.choices %}
 									<div class="payment_options">
-										<label class="payment_option clearfix">Paypal
-											<input type="radio" name="radio">
-											<span class="checkmark"></span>
-										</label>
-										<label class="payment_option clearfix">Cash on delivery
-											<input type="radio" name="radio">
-											<span class="checkmark"></span>
-										</label>
-										<label class="payment_option clearfix">Credit card
-											<input type="radio" name="radio">
-											<span class="checkmark"></span>
-										</label>
-										<label class="payment_option clearfix">Direct bank transfer
-											<input type="radio" checked="checked" name="radio">
+										<label class="payment_option clearfix">{{ name }}
+											<input type="radio" value="{{ value }}" name="method_of_payment">
 											<span class="checkmark"></span>
 										</label>
 									</div>
+									{% endfor %}
+
 								</div>
 
 								<!-- Order Text -->
@@ -166,13 +152,12 @@
 									bibendum sodales arcu id te mpus. Ut consectetur lacus.</div>
 
 								<button type='submit' class="checkout_button trans_200"><a>place order</a></button>
-								</div>
 							</div>
 						</div>
-						</form>
-
-
 					</div>
+					</form>
+
+
 				</div>
 			</div>
 		</div>

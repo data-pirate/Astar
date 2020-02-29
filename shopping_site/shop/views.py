@@ -5,9 +5,26 @@ from django.views.generic import ListView, DetailView, View
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Item, Order, OrderItem
-from .forms import CheckoutForm
+from .models import Item, Order, OrderItem, BillingAddress
+from .forms import CheckoutForm, AddProduct
+from django.forms import modelformset_factory
 # Create your views here.
+
+@login_required
+def add_product(request):
+    if request.method == 'POST':
+        form = AddProduct()
+        if form.is_valid():
+            item = form.save(commit=False)
+            item.user = request.user
+            item.save()
+
+    else:
+        form = AddProduct()
+    context = {
+            'form': form
+        }
+    return render(request, 'add_product.html', context)
 
 
 class HomeView(ListView):
@@ -19,6 +36,7 @@ class HomeView(ListView):
 class ItemDetailView(DetailView):
     model = Item
     template_name = 'product.html'
+
 
 @login_required
 def add_to_cart(request, pk, slug):
@@ -45,6 +63,7 @@ def add_to_cart(request, pk, slug):
         order.items.add(order_item)
     messages.info(request, 'Product was added to cart successfully')
     return redirect("shop:product", pk=pk, slug=slug)
+
 
 @login_required
 def single_item_add_to_cart(request, pk, slug):
@@ -76,6 +95,7 @@ def single_item_add_to_cart(request, pk, slug):
     messages.info(request, 'Product was added to cart successfully')
     return redirect("shop:cart_summary")
 
+
 @login_required
 def remove_from_cart(request, pk, slug):
     item = get_object_or_404(Item, id=pk)
@@ -92,7 +112,8 @@ def remove_from_cart(request, pk, slug):
                 ordered=False
             )[0]
             order.items.remove(order_item)
-            messages.info(request, 'Product was removed from cart successfully')
+            messages.info(
+                request, 'Product was removed from cart successfully')
             return redirect("shop:product", pk=pk, slug=slug)
         else:
             messages.info(request, 'product isn\'t in the cart ')
@@ -118,11 +139,13 @@ def remove_single_item_from_cart(request, pk, slug):
             )[0]
             if order_item.quantity <= 1:
                 order.items.remove(order_item)
-                messages.info(request, 'Product was removed from cart successfully')
+                messages.info(
+                    request, 'Product was removed from cart successfully')
                 return redirect("shop:cart_summary")
             order_item.quantity -= 1
             order_item.save()
-            messages.info(request, 'Product was removed from cart successfully')
+            messages.info(
+                request, 'Product was removed from cart successfully')
             return redirect("shop:cart_summary")
         else:
             messages.info(request, 'product isn\'t in the cart ')
@@ -132,7 +155,8 @@ def remove_single_item_from_cart(request, pk, slug):
         return redirect("shop:cart_summary")
 # #
 
-class CartSummary(LoginRequiredMixin ,View):
+
+class CartSummary(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
         try:
             order = Order.objects.get(user=self.request.user, ordered=False)
@@ -146,7 +170,8 @@ class CartSummary(LoginRequiredMixin ,View):
             }
             return render(self.request, 'cart.html', context)
 
-class Checkout(View):
+
+class Checkout(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
         form = CheckoutForm()
         context = {
@@ -156,17 +181,50 @@ class Checkout(View):
 
     def post(self, *args, **kwargs):
         form = CheckoutForm(self.request.POST or None)
-        if form.is_valid():
-            print('form is valid')
+        try:
+            order = Order.objects.get(user=self.request.user, ordered=False)
+            if form.is_valid():
+                first_name = form.cleaned_data('first_name')
+                last_name = form.cleaned_data('last_name')
+                address1 = form.cleaned_data('address1')
+                address2 = form.cleaned_data('address2')
+                company = form.cleaned_data('company')
+                country = form.cleaned_data('country')
+                zip_code = form.cleaned_data('zip_code')
+                terms = form.cleaned_data('terms')
+                newsletter = form.cleaned_data('newsletter')
+                method_of_payment = form.cleaned_data('method_of_payment')
+                save_info = form.cleaned_data('save_info')
+                phone = form.cleaned_data('phone')
+                email = form.cleaned_data('email')
+                billing_address = BillingAddress(
+                    user = self.request.user,
+                    country = country,
+                    address1 = address1,
+                    first_name = first_name,
+                    last_name = last_name,
+                    address2 = address2,
+                    newsletter = newsletter,
+                    company = company,
+                    zip_code = zip_code,
+                    phone = phone
+
+                )
+                billing_address.save()
+                order.billing_address = billing_address
+                order.save()
+                return redirect('shop:checkout')
+            messages.warning(self.request, 'failed !!!')
             return redirect('shop:checkout')
+        except ObjectDoesNotExist:
+            return render(self.request, 'shop:checkout')
 
 
+class PaymentView(View):
+    def get(self, *args, **kwargs):
+        return render(self.request, 'payment.html')
 
-
-
-
-
-# 
+#
 
 def index(request):
 
@@ -195,6 +253,7 @@ def blog(request):
 
 def cart(request):
     return render(request, 'cart.html')
+
 
 def categories(request):
     return render(request, 'categories.html')

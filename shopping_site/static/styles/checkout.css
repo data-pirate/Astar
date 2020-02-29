@@ -126,7 +126,8 @@ h1, h2, h3, h4, h5, h6
 
 .form-control
 {
-	color: #db5246;
+	color: #2c2d30;
+	font-weight: bold;
 }
 section
 {

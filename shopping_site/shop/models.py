@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.shortcuts import reverse
+from django_countries.fields import CountryField
 
 CATEGORY_CHOICES = (
     ('men', 'Men'),
@@ -22,6 +23,8 @@ LABELS = (
 
 
 class Item(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=10,decimal_places=2)
     discount_price = models.DecimalField(max_digits=10,decimal_places=2,null=True, blank=True)
@@ -65,6 +68,12 @@ class Item(models.Model):
             'slug': self.slug
         })
 
+class ItemImages(models.Model):
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='media/shop/product_images', blank=True, null=True)
+
+    def __str__(self):
+        return self.item.title + 'image'
 
 class OrderItem(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
@@ -95,6 +104,7 @@ class Order(models.Model):
     items = models.ManyToManyField(OrderItem)
     start_date = models.DateTimeField(auto_now_add=True, auto_now=False)
     ordered_date = models.DateTimeField()
+    billing_address = models.ForeignKey('BillingAddress', on_delete=models.SET_NULL, blank=True, null=True)
 
     def __str__(self):
         return self.user.username
@@ -105,3 +115,21 @@ class Order(models.Model):
             total += order_item.get_final_price()
         
         return total
+
+class BillingAddress(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    country = CountryField(multiple=False)
+    address1 = models.CharField(max_length=100)
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    address2 = models.CharField(max_length=100)
+    newsletter = models.CharField(max_length=100)
+    company = models.CharField(max_length=100)
+    zip_code = models.IntegerField()
+    phone = models.IntegerField()
+
+
+    def __str__(self):
+        return self.user.username
+
+    
