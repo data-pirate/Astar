@@ -68,7 +68,30 @@ class CheckoutForm(forms.Form):
     }))
 
 
+CATEGORY_CHOICES = (
+    ('men', 'Men'),
+    ('women', 'Women')
+)
+
+SUB_CATEGORY = (
+    ('shirts', 'Shirts'),
+    ('dress', 'Dresses'),
+    ('jeans', 'Jeans'),
+    ('shoes', 'Shoes'),
+    ('purse', 'Purse')
+)
+LABELS = (
+    ('hot', 'Hot'),
+    ('new', 'New'),
+    ('sale', 'Sale')
+)
+
+
 class AddProduct(forms.ModelForm):
+    category = forms.ChoiceField(choices=CATEGORY_CHOICES, required=True),
+    sub_category = forms.ChoiceField(choices=SUB_CATEGORY, required=True),
+    label = forms.ChoiceField(choices=LABELS, required=False)
+
     class Meta:
         model = Item
         fields = (
@@ -84,9 +107,7 @@ class AddProduct(forms.ModelForm):
         widgets = {
             'description': forms.Textarea(attrs={'cols': 80, 'rows': 5, 'class': 'form-control'}),
             'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'slug': forms.TextInput(attrs={'class': 'form-control'}),
             'price': forms.TextInput(attrs={'class': 'form-control'}),
             'discount_price': forms.TextInput(attrs={'class': 'form-control'}),
-            'category': forms.TextInput(attrs={'class': 'form-control'}),
-            'sub_category': forms.TextInput(attrs={'class': 'form-control'}),
-            'label': forms.TextInput(attrs={'class': 'form-control'}),
         }

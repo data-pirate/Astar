@@ -15,15 +15,7 @@ urlpatterns = [
     path('cart_summary',views.CartSummary.as_view(), name='cart_summary'),
     path('checkout/', views.Checkout.as_view(), name='checkout'),
     path('payment/<payment_option/', views.PaymentView.as_view(), name='payment'),
+    path('categories/', views.categories, name='category'),
+    path('s/', views.search, name='search'),
     path('add_product/', views.add_product, name='add_product'),
-
-    # 
-    # path('blog/', views.blog, name='blog'),
-    # path('s/', views.search, name='search'),
-    # path('signup/', views.signup, name='signup'),
-    # path('handle_signup', views.handle_signup, name='handle_signup'),
-    # path('handle_login', views.handle_login, name='handle_login'),
-    # path('login/', views.login, name='login'),
-    # path('forgot_pass/', views.forgot_password, name='forgot_password'),
-    # path('categories/', views.categories, name='category'),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

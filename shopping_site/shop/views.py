@@ -5,24 +5,36 @@ from django.views.generic import ListView, DetailView, View
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Item, Order, OrderItem, BillingAddress
+from .models import Item, Order, OrderItem, BillingAddress, ItemImages
 from .forms import CheckoutForm, AddProduct
 from django.forms import modelformset_factory
 # Create your views here.
 
 @login_required
 def add_product(request):
+    ImageFormset = modelformset_factory(ItemImages, fields=('image',), extra=5)
     if request.method == 'POST':
-        form = AddProduct()
-        if form.is_valid():
+        form = AddProduct(request.POST)
+        formset = ImageFormset(request.POST or None, request.FILES or None)
+        if form.is_valid() and formset.is_valid():
             item = form.save(commit=False)
             item.user = request.user
             item.save()
 
+            for each in formset:
+                try:
+                    images = ItemImages(item=item, image=each.cleaned_data['image'])
+                    images.save()
+                    return redirect('add_product')
+                except Exception as e:
+                    break
+
     else:
         form = AddProduct()
+        formset = ImageFormset(queryset=ItemImages.objects.none())
     context = {
-            'form': form
+            'form': form,
+            'formset': formset
         }
     return render(request, 'add_product.html', context)
 
@@ -170,6 +182,20 @@ class CartSummary(LoginRequiredMixin, View):
             }
             return render(self.request, 'cart.html', context)
 
+def search(request):
+    try:
+        q = request.GET['q']
+    except:
+        q = None
+
+    if q:
+        products = Item.objects.filter(title__icontains=q)
+        results = {'query': q, 'products': products}
+        return render(request, 'results.html', results)
+    else:
+        results = {'empty': True}
+        return render(request, 'index.html')
+
 
 class Checkout(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
@@ -230,21 +256,6 @@ def index(request):
 
     products = Item.objects.all()
     return render(request, 'index.html', {'product': products})
-
-
-def search(request):
-    try:
-        q = request.GET['q']
-    except:
-        q = None
-
-    if q:
-        products = Product.objects.filter(product_name__icontains=q)
-        results = {'query': q, 'products': products}
-        return render(request, 'results.html', results)
-    else:
-        results = {}
-        return render(request, 'index.html')
 
 
 def blog(request):

@@ -1937,7 +1937,7 @@ pre {
   .form-control:focus {
     color: #495057;
     background-color: #fff;
-    border-color: #bbe432;
+    border-color: #D6ED17FF;
     outline: 0;
     -webkit-box-shadow: 0 0 0 0.2rem rgba(187,228,50, 0.8);
             box-shadow: 0 0 0 0.2rem rgba(187,228,50, 0.8); }

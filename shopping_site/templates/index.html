@@ -161,10 +161,12 @@
 						<div class="product grid-item {{ every.get_label_display }}">
 							<div class="product_inner">
 								<a href="{{ every.get_absolute_url }}">
+									{% for image in every.itemimages_set.all %}
 									<div class="product_image">
-										<img src="/media/{{each.image}}" alt="">
+										<img src="/media/{{image.image}}" alt="">
 										<div class="product_tag">{{ every.get_label_display }}</div>
 									</div>
+									{% endfor %}
 									<div class="product_content text-center">
 										<div class="product_title"><a
 												href="{{ every.get_absolute_url }}">{{ every.title }}</a></div>

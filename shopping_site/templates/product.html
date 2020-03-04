@@ -58,29 +58,28 @@
 		<div class="container">
 			<div class="row">
 				<div class="col">
+
 					<div
 						class="product_content_container d-flex flex-lg-row flex-column align-items-start justify-content-start">
 						<div class="product_content order-lg-1 order-2">
 							<div class="product_content_inner">
+								{% for each in object.itemimages_set.all %}
+								{{ each.image }}
+
+								{% if forloop.counter|divisibleby:2 %}
 								<div
 									class="product_image_row d-flex flex-md-row flex-column align-items-md-end align-items-start justify-content-start">
-									<div class="product_image_1 product_image">
-										<img src="{% static 'images/product_single_1.jpg' %}" alt="">
+									<div class="product_image_{{forloop.counter}} product_image">
+										<img src="{% static 'media/{{ each.image }}' %}" alt="">
 									</div>
-									<div class="product_image_2 product_image"><img
-											src="{% static 'images/product_single_2.jpg' %}" alt=""></div>
 								</div>
+								{% else %}
 								<div class="product_image_row">
-									<div class="product_image_3 product_image"><img
-											src="{% static 'images/product_single_3.jpg' %}" alt=""></div>
+									<div class="product_image_{{forloop.counter}} product_image"><img
+											src="{% static '{{ each.image }}' %}" alt=""></div>
 								</div>
-								<div
-									class="product_image_row d-flex flex-md-row flex-column align-items-start justify-content-start">
-									<div class="product_image_4 product_image"><img
-											src="{% static 'images/product_single_4.jpg' %}" alt=""></div>
-									<div class="product_image_5 product_image"><img
-											src="{% static 'images/product_single_5.jpg' %}" alt=""></div>
-								</div>
+								{% endif %}
+								{% endfor %}
 							</div>
 							<div>
 								<h1 class="p-2">product description:</h1>

@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.shortcuts import reverse
 from django_countries.fields import CountryField
 
@@ -9,16 +10,16 @@ CATEGORY_CHOICES = (
 )
 
 SUB_CATEGORY = (
-    ('Shirts', 'Shirts'),
-    ('Dress', 'Dresses'),
-    ('Jeans', 'Jeans'),
-    ('Shoes', 'Shoes'),
+    ('shirts', 'Shirts'),
+    ('dress', 'Dresses'),
+    ('jeans', 'Jeans'),
+    ('shoes', 'Shoes'),
     ('purse', 'Purse')
 )
 LABELS = (
-    ('Hot', 'hot'),
-    ('New', 'new'),
-    ('Sale', 'sale')
+    ('hot', 'hot'),
+    ('new', 'new'),
+    ('sale', 'sale')
 )
 
 
@@ -70,10 +71,10 @@ class Item(models.Model):
 
 class ItemImages(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='media/shop/product_images', blank=True, null=True)
+    image = models.ImageField(upload_to='shop/product_images', blank=True, null=True)
 
     def __str__(self):
-        return self.item.title + 'image'
+        return self.item.title + ' image'
 
 class OrderItem(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
@@ -132,4 +133,11 @@ class BillingAddress(models.Model):
     def __str__(self):
         return self.user.username
 
-    
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    dob = models.DateField(blank=True, null=True)
+    photo = models.ImageField(null=True, blank=True)
+
+
+    def __str__(self):
+        return self.user.username

@@ -11,7 +11,9 @@
 
 <h1>you searched for: {{ query }}</h1>
 <!-- Products -->
-
+{% if empty %}
+<h1>No Results For : {{ query }}</h1>
+{% else %}
 <div class="products">
 	<div class="section_container">
 		<div class="container">
@@ -42,6 +44,7 @@
 						</div>
 					</div>
 					{% endfor %}
+					{% endif %}
 				</div>
 			</div>
 		</div>

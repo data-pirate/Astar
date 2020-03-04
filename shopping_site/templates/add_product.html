@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 {% block head %}
 <link rel="stylesheet" type="text/css" href="{% static 'styles/checkout.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'styles/checkout_responsive.css' %}">
 {% endblock %}
-
 {% block content %}
 <!-- Home -->
 
@@ -13,12 +13,12 @@
         data-image-src="{% static 'images/checkout.jpg' %}" data-speed="0.8"></div>
     <div class="home_container">
         <div class="home_content">
-            <div class="home_title">Checkout</div>
+            <div class="home_title">Add Product</div>
             <div class="breadcrumbs">
-                <ul class="d-flex flex-row align-items-center justify-content-start">
+                <ul class="d-flex flex-row align-items-centFer justify-content-start">
                     <li><a href="index">Home</a></li>
-                    <li><a href="cart.html">Your Cart</a></li>
-                    <li>Checkout</li>
+                    <li><a href="cart.html">Account</a></li>
+                    <li>Add Product</li>
                 </ul>
             </div>
         </div>
@@ -35,147 +35,35 @@
                         class="checkout_container d-flex flex-xxl-row flex-column align-items-start justify-content-start">
                         <!-- Billing -->
                         <div class="billing checkout_box">
-                            <div class="checkout_title">Billing Address</div>
+                            <div class="checkout_title">Please Provide Product Details: </div>
                             <div class="checkout_form_container">
-                                <form method="POST" id="checkout_form" class="checkout_form">
+                                <form method="POST" id="checkout_form" enctype="multipart/form-data"
+                                    class="checkout_form md-form">
                                     {% csrf_token %}
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <!-- {{form}} -->
-                                            <!-- Name -->
-                                            <label for="title">Title*</label>
-                                            {{ form.title }}
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <!-- Last Name -->
-                                            <label for="price">Price*</label>
-                                            {{ form.price }}
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <!-- Company -->
-                                        <label for="discount_price">discount price <span>(Optional)</span></label>
-                                        {{ form.discount_price }}
-                                    </div>
-                                    <div>
-                                        <!-- Country -->
-                                        <label for="category">Category*</label>
-                                        {{ form.category }}
-                                    </div>
-                                    <div>
-                                        <!-- Address -->
-                                        <label for="sub_category">Sub Category*</label>
-                                        {{ form.sub_category }}
-                                    </div>
-                                    <div>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                              <button class="btn btn-outline-secondary" type="button">Button</button>
-                                            </div>
-                                            {% for name, value in form.categot %}
-                                            <select class="custom-select" id="inputGroupSelect03">
-                                              <option selected>Choose...</option>
-                                              <option value="1">One</option>
-                                              <option value="2">Two</option>
-                                              <option value="3">Three</option>
-                                            </select>
-                                          </div>
-                                        <!-- Zipcode -->
-                                        <label for="label">Label <span>(Optional)</span></label>
-                                        {{ form.label }}
-                                    </div>
-                                    <div>
-                                        <!-- Phone no -->
-                                        <label for="description">Description*</label>
-                                        {{ form.description }}
-                                    </div>
-                                    <div>
-                                        <!-- Email -->
-                                        <label for="checkout_email">Email Address*</label>
-                                        {{ form.email }}
-                                    </div>
-                                    <div class="checkout_extra">
-                                        <ul>
-                                            <li
-                                                class="billing_info d-flex flex-row align-items-center justify-content-start">
-                                                <label class="checkbox_container">
-                                                    {{ form.terms }}
-                                                    <span class="checkbox_mark"></span>
-                                                    <span class="checkbox_text">Terms and conditions</span>
-                                                </label>
-                                            </li>
-                                            <li
-                                                class="billing_info d-flex flex-row align-items-center justify-content-start">
-                                                <label class="checkbox_container">
-                                                    {{ form.newsletter }}
-                                                    <span class="checkbox_mark"></span>
-                                                    <span class="checkbox_text">Subscribe to our
-                                                        newsletter</span>
-                                                </label>
-                                            </li>
-                                            <li
-                                                class="billing_info d-flex flex-row align-items-center justify-content-start">
-                                                <label class="checkbox_container">
-                                                    {{ form.save_info }}
-                                                    <span class="checkbox_mark"></span>
-                                                    <span class="checkbox_text">Save Information</span>
-                                                </label>
-                                            </li>
-                                        </ul>
-                                    </div>
-                            </div>
-                        </div>
-                        <!-- Cart Total -->
-                        <div class="cart_total">
-                            <div class="cart_total_inner checkout_box">
-                                <div class="checkout_title">Cart total</div>
-                                <ul class="cart_extra_total_list">
-                                    <li class="d-flex flex-row align-items-center justify-content-start">
-                                        <div class="cart_extra_total_title">Subtotal</div>
-                                        <div class="cart_extra_total_value ml-auto">$29.90</div>
-                                    </li>
-                                    <li class="d-flex flex-row align-items-center justify-content-start">
-                                        <div class="cart_extra_total_title">Shipping</div>
-                                        <div class="cart_extra_total_value ml-auto">Free</div>
-                                    </li>
-                                    <li class="d-flex flex-row align-items-center justify-content-start">
-                                        <div class="cart_extra_total_title">Total</div>
-                                        <div class="cart_extra_total_value ml-auto">$29.90</div>
-                                    </li>
-                                </ul>
 
-                                <!-- Payment Options -->
-                                <div class="payment">
-                                    {% for value, name in form.fields.method_of_payment.choices %}
-                                    <div class="payment_options">
-                                        <label class="payment_option clearfix">{{ name }}
-                                            <input type="radio" value="{{ value }}" name="method_of_payment">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </div>
-                                    {% endfor %}
-
+                                    {{ form.as_p }}
+                                    {{ formset.as_table }}
                                 </div>
-
-                                <!-- Order Text -->
-                                <div class="order_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                    Proin pharetra temp or so dales. Phasellus sagittis auctor gravida. Integ er
-                                    bibendum sodales arcu id te mpus. Ut consectetur lacus.</div>
-
-                                <button type='submit' class="checkout_button trans_200"><a>place order</a></button>
                             </div>
                         </div>
+
+                        <!-- Order Text -->
+                        <div class="order_text">Lorem ipsum dolor sit amet, consectetur adipiscing
+                            elit.
+                            Proin
+                            pharetra temp or so dales. Phasellus sagittis auctor gravida. Integ er
+                            bibendum
+                            sodales arcu id te mpus. Ut consectetur lacus.</div>
+
+                        <button type='submit' class="checkout_button trans_200"><a>Add Product</a></button>
                     </div>
-                    </form>
-
-
                 </div>
             </div>
+            </form>
+
+
         </div>
     </div>
-</div>
-{% endblock %}
-
-{% block js %}
+{% endblock %} {% block js %}
 <script src="{% static 'js/checkout.js' %}"></script>
 {% endblock %}
