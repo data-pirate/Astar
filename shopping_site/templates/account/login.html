@@ -6,50 +6,105 @@
 {% load crispy_forms_tags %}
 
 {% block head %}
-<link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/main_styles.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/responsive.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/mdb.css' %}">
 {% endblock %}
 
 {% block head_title %}{% trans "Sign In" %}{% endblock %}
 
 {% block content %}
-<div class="text-center">
-  <h1 class="logo">{% trans "Sign In" %}</h1>
-  <div class="login-form-1">
-    {% get_providers as socialaccount_providers %}
+{% get_providers as socialaccount_providers %}
 
-    {% if socialaccount_providers %}
-    <p>{% blocktrans with site.name as site_name %}Please sign in with one
-      of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
-      for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
+{% if socialaccount_providers %}
+<p>{% blocktrans with site.name as site_name %}Please sign in with one
+  of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
+  for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 
-    <div class="socialaccount_ballot">
+<div class="socialaccount_ballot">
 
-      <ul class="socialaccount_providers">
-        {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-      </ul>
+  <ul class="socialaccount_providers">
+    {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+  </ul>
 
-      <div class="login-or">{% trans 'or' %}</div>
+  <div class="login-or">{% trans 'or' %}</div>
 
-    </div>
-
-    {% include "socialaccount/snippets/login_extra.html" %}
-
-    {% else %}
-    <p>{% blocktrans %}If you have not created an account yet, then please
-      <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
-    {% endif %}
-
-    <form class="login text-left" method="POST" action="{% url 'account_login' %}">
-      {% csrf_token %}
-      {{ form|crispy }}
-      {% if redirect_field_value %}
-      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-      {% endif %}
-      <a class="btn" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
-      <button class="login-button" type="submit"><i class="fa fa-chevron-right"></i></button>
-    </form>
-  </div>
 </div>
 
+{% include "socialaccount/snippets/login_extra.html" %}
+{% endif %}
+<div class="card m-4">
+  <div class="text-center">
+    <form class="login text-center" method="POST" action="{% url 'account_login' %}">
+      {% csrf_token %}
+      <!-- hawehfhja -->
+      <!-- Material form login -->
+
+      <div class="rounded card-header my-green-color font-weight-bold black-text text-center py-4">
+        <h4 class="logo font-weight-bold black-text">{% trans "Sign In" %}</h4>
+      </div>
+
+      <!--Card content-->
+      <div class="card-body px-lg-5 pt-0">
+
+        <!-- Form -->
+        {% for field in form %}
+        <div class="md-form">
+          {{ field }}
+          {% if field.html_name == 'login' %}
+          <label for="{{ field.id_for_label }}">Username</label>
+          {% elif field.html_name == 'remember' %}
+          <label for="{{ field.id_for_label }}">Remember me</label>
+          {% else %}
+          <label for="{{ field.id_for_label }}">{{ field.html_name }}</label>
+          {% endif %}
+        </div>
+        {% endfor %}
+
+
+        <div class="d-flex justify-content-around">
+          <div>
+            <!-- Forgot password -->
+            <a href="{% url 'account_reset_password' %}">Forgot password?</a>
+          </div>
+        </div>
+
+        <!-- Sign in button -->
+        <button class="btn btn-outline-mygreen btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Sign
+          in</button>
+
+        <!-- Register -->
+        <p>Not a member?
+          <a href="{{ signup_url }}">Register</a>
+        </p>
+
+        <!-- Social login -->
+        <p>or sign in with:</p>
+        <a type="button" class="btn-floating btn-fb btn-sm">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a type="button" class="btn-floating btn-tw btn-sm">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a type="button" class="btn-floating btn-li btn-sm">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a type="button" class="btn-floating btn-git btn-sm">
+          <i class="fab fa-github"></i>
+        </a>
+        <!-- Form -->
+      </div>
+
+  </div>
+  <!-- Material form login -->
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+  {% endif %}
+  </form>
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/mdb.js' %}"></script>
 {% endblock %}

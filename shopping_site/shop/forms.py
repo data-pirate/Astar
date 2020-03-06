@@ -88,7 +88,7 @@ LABELS = (
 
 
 class AddProduct(forms.ModelForm):
-    category = forms.ChoiceField(choices=CATEGORY_CHOICES, required=True),
+    category = forms.ChoiceField(label='category' ,choices=CATEGORY_CHOICES, required=True),
     sub_category = forms.ChoiceField(choices=SUB_CATEGORY, required=True),
     label = forms.ChoiceField(choices=LABELS, required=False)
 
@@ -105,7 +105,7 @@ class AddProduct(forms.ModelForm):
             'slug'
         )
         widgets = {
-            'description': forms.Textarea(attrs={'cols': 80, 'rows': 5, 'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'cols': 80, 'rows': 4, 'class': 'md-textarea form-control'}),
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'slug': forms.TextInput(attrs={'class': 'form-control'}),
             'price': forms.TextInput(attrs={'class': 'form-control'}),
