@@ -43,6 +43,17 @@
       <div class="rounded card-header my-green-color font-weight-bold black-text text-center py-4">
         <h4 class="logo font-weight-bold black-text">{% trans "Sign In" %}</h4>
       </div>
+      {% if messages %}
+      {% for message in messages %}
+      <div class="mt-2 alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        {{ message.tag }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {% endfor %}
+      {% endif %}
 
       <!--Card content-->
       <div class="card-body px-lg-5 pt-0">

@@ -10765,6 +10765,7 @@ body.scrollable {
     border: none;
     border-bottom: 1px solid #ced4da;
     border-radius: 0;
+    font-family: 'Poppins', sans-serif;
     outline: none;
     -webkit-box-shadow: none;
     box-shadow: none;
@@ -16683,8 +16684,8 @@ label.btn input[type="checkbox"]:checked+label:before {
     width: 12px;
     height: 1.375rem;
     border-top: 2px solid transparent;
-    border-right: 2px solid #4285f4;
-    border-bottom: 2px solid #4285f4;
+    border-right: 2px solid #bbe432;
+    border-bottom: 2px solid #bbe432;
     border-left: 2px solid transparent;
     -webkit-transform: rotate(40deg);
     transform: rotate(40deg);

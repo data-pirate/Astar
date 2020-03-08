@@ -18,4 +18,5 @@ urlpatterns = [
     path('categories/', views.categories, name='category'),
     path('s/', views.search, name='search'),
     path('add_product/', views.add_product, name='add_product'),
+    path('<id>/edit_product/', views.edit_product, name='edit_product'),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

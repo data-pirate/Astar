@@ -102,12 +102,33 @@ class AddProduct(forms.ModelForm):
             'sub_category',
             'label',
             'description',
-            'slug'
         )
         widgets = {
             'description': forms.Textarea(attrs={'cols': 80, 'rows': 4, 'class': 'md-textarea form-control'}),
             'title': forms.TextInput(attrs={'class': 'form-control'}),
-            'slug': forms.TextInput(attrs={'class': 'form-control'}),
+            'price': forms.TextInput(attrs={'class': 'form-control'}),
+            'discount_price': forms.TextInput(attrs={'class': 'form-control'}),
+        }
+
+class EditProduct(forms.ModelForm):
+    category = forms.ChoiceField(label='category' ,choices=CATEGORY_CHOICES, required=True),
+    sub_category = forms.ChoiceField(choices=SUB_CATEGORY, required=True),
+    label = forms.ChoiceField(choices=LABELS, required=False)
+
+    class Meta:
+        model = Item
+        fields = (
+            'title',
+            'price',
+            'discount_price',
+            'category',
+            'sub_category',
+            'label',
+            'description',
+        )
+        widgets = {
+            'description': forms.Textarea(attrs={'cols': 80, 'rows': 4, 'class': 'md-textarea form-control'}),
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
             'price': forms.TextInput(attrs={'class': 'form-control'}),
             'discount_price': forms.TextInput(attrs={'class': 'form-control'}),
         }

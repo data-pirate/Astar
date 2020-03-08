@@ -13,12 +13,12 @@
         data-image-src="{% static 'images/checkout.jpg' %}" data-speed="0.8"></div>
     <div class="home_container">
         <div class="home_content">
-            <div class="home_title">Add Product</div>
+            <div class="home_title">Edit Product</div>
             <div class="breadcrumbs">
                 <ul class="d-flex flex-row align-items-centFer justify-content-start">
                     <li><a href="index">Home</a></li>
                     <li><a href="cart.html">Account</a></li>
-                    <li>Add Product</li>
+                    <li>Edit Product</li>
                 </ul>
             </div>
         </div>
@@ -84,23 +84,7 @@
                                     {% endif %}
                                     {% endfor %}
                             </div>
-                            <div>
-                                <strong class="black-text font-weight-bold">Please Upload Some Images of the Product: </strong>
-                            </div>
-                            {{ formset.management_form }}
-                            {% for field in formset %}
-                            <div class="md-form">
-                                <div class="file-field">
-                                    <div class="btn btn-rounded aqua-gradient btn-sm float-left">
-                                        <span>choose file</span>
-                                        {{ field }}
-                                    </div>
-                                    <div class="file-path-wrapper">
-                                        <input class="file-path validate" type="text" placeholder="Upload your file">
-                                    </div>
-                                </div>
-                            </div>
-                            {% endfor %}
+
                         </div>
                     </div>
 
@@ -112,7 +96,7 @@
                         bibendum
                         sodales arcu id te mpus. Ut consectetur lacus.</div>
 
-                    <button type='submit' class="checkout_button trans_200"><a>Add Product</a></button>
+                    <button type='submit' class="checkout_button trans_200"><a>Save Changes</a></button>
                 </div>
             </div>
         </div>

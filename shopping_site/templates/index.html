@@ -82,8 +82,7 @@
 <!-- Boxes -->
 {% if messages %}
 {% for message in messages %}
-<div class="mt-2 alert alert-{{ message.tags }} alert-dismissible fade show"
-	role="alert">
+<div class="mt-2 alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
 	{{ message }}
 	{{ message.tag }}
 	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -161,11 +160,13 @@
 						<div class="product grid-item {{ every.get_label_display }}">
 							<div class="product_inner">
 								<a href="{{ every.get_absolute_url }}">
-									{% for image in every.itemimages_set.all %}
+									{% for each in every.itemimages_set.all %}
+									{% if forloop.counter == 1 %}
 									<div class="product_image">
-										<img src="/media/{{image.image}}" alt="">
+										<img src="{{each.image.url}}" alt="">
 										<div class="product_tag">{{ every.get_label_display }}</div>
 									</div>
+									{% endif %}
 									{% endfor %}
 									<div class="product_content text-center">
 										<div class="product_title"><a

@@ -1,15 +1,16 @@
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect, Http404
 from django.views.generic import ListView, DetailView, View
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Item, Order, OrderItem, BillingAddress, ItemImages
-from .forms import CheckoutForm, AddProduct
+from .forms import CheckoutForm, AddProduct, EditProduct
 from django.forms import modelformset_factory
 # Create your views here.
 
+# for adding product
 @login_required
 def add_product(request):
     ImageFormset = modelformset_factory(ItemImages, fields=('image',), extra=5)
@@ -25,10 +26,10 @@ def add_product(request):
                 try:
                     images = ItemImages(item=item, image=each.cleaned_data['image'])
                     images.save()
-                    return redirect('add_product')
                 except Exception as e:
                     break
-
+            return redirect('shop:index')
+            
     else:
         form = AddProduct()
         formset = ImageFormset(queryset=ItemImages.objects.none())
@@ -39,17 +40,39 @@ def add_product(request):
     return render(request, 'add_product.html', context)
 
 
+# Edit the existing product using its id
+def edit_product(request, id):
+    item = get_object_or_404(Item, id=id)
+    if item.user != request.user:
+        raise Http404()
+    if request.method == 'POST':
+        form = EditProduct(request.POST or None, instance=item)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(item.get_absolute_url())
+    else:
+        form = EditProduct(instance=item)
+    context = {
+        'form': form,
+        'item': item
+    }
+
+    return render(request, 'edit_product.html', context)
+
+
+# landing page
 class HomeView(ListView):
     model = Item
     paginate_by = 15
     template_name = 'index.html'
 
-
+# Product detail view
 class ItemDetailView(DetailView):
     model = Item
     template_name = 'product.html'
 
 
+# logic for adding something to the cart
 @login_required
 def add_to_cart(request, pk, slug):
     item = get_object_or_404(Item, id=pk)
@@ -77,6 +100,7 @@ def add_to_cart(request, pk, slug):
     return redirect("shop:product", pk=pk, slug=slug)
 
 
+# for adding item using cart 
 @login_required
 def single_item_add_to_cart(request, pk, slug):
     item = get_object_or_404(Item, id=pk)
@@ -108,6 +132,7 @@ def single_item_add_to_cart(request, pk, slug):
     return redirect("shop:cart_summary")
 
 
+# delete product
 @login_required
 def remove_from_cart(request, pk, slug):
     item = get_object_or_404(Item, id=pk)
@@ -133,7 +158,9 @@ def remove_from_cart(request, pk, slug):
     else:
         messages.info(request, 'you don\'t have active order')
         return redirect("shop:product", pk=pk, slug=slug)
-# #
+
+
+# remove single product from cart
 @login_required
 def remove_single_item_from_cart(request, pk, slug):
     item = get_object_or_404(Item, id=pk)
@@ -167,7 +194,7 @@ def remove_single_item_from_cart(request, pk, slug):
         return redirect("shop:cart_summary")
 # #
 
-
+# cart summary
 class CartSummary(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
         try:
@@ -182,6 +209,7 @@ class CartSummary(LoginRequiredMixin, View):
             }
             return render(self.request, 'cart.html', context)
 
+# for search
 def search(request):
     try:
         q = request.GET['q']
@@ -197,6 +225,7 @@ def search(request):
         return render(request, 'index.html')
 
 
+# checkout
 class Checkout(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
         form = CheckoutForm()
@@ -246,29 +275,18 @@ class Checkout(LoginRequiredMixin, View):
             return render(self.request, 'shop:checkout')
 
 
+# just renders the payment view
 class PaymentView(View):
     def get(self, *args, **kwargs):
         return render(self.request, 'payment.html')
 
 #
 
-def index(request):
-
-    products = Item.objects.all()
-    return render(request, 'index.html', {'product': products})
-
-
 def blog(request):
     return render(request, 'blog.html')
-
 
 def cart(request):
     return render(request, 'cart.html')
 
-
 def categories(request):
     return render(request, 'categories.html')
-
-
-def signup(request):
-    return render(request, 'signup.html')

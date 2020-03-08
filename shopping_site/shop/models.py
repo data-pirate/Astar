@@ -1,8 +1,11 @@
 from django.db import models
+from django.db.models.signals import pre_save
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.shortcuts import reverse
 from django_countries.fields import CountryField
+from django.dispatch import receiver
+from django.utils.text import slugify
 
 CATEGORY_CHOICES = (
     ('men', 'Men'),
@@ -28,7 +31,7 @@ class Item(models.Model):
                              on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=10,decimal_places=2)
-    discount_price = models.DecimalField(max_digits=10,decimal_places=2,null=True, blank=True)
+    discount_price = models.DecimalField(max_digits=10,decimal_places=2,null=True, blank=True, verbose_name='discount price')
     category = models.CharField(choices=CATEGORY_CHOICES, default=None, max_length=5)
     sub_category = models.CharField(choices=SUB_CATEGORY, default=None, max_length=6)
     label = models.CharField(choices=LABELS,default=None, null=True,
@@ -69,9 +72,16 @@ class Item(models.Model):
             'slug': self.slug
         })
 
+
+@receiver(pre_save, sender=Item)
+def pre_save_slug(sender, **kwargs):
+    slug = slugify(kwargs['instance'].title)
+    kwargs['instance'].slug = slug
+
+
 class ItemImages(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='shop/product_images', blank=True, null=True)
+    image = models.ImageField(upload_to='shop/product_images', blank=True, null=True, verbose_name="")
 
     def __str__(self):
         return self.item.title + ' image'
