@@ -17,7 +17,8 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/mdb.css' %}">
 	<script src="{% static 'js/jquery.js' %}"></script>
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+	<link href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+	<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"> -->
 	{% block head %}
 	{% endblock %}
 </head>
@@ -572,8 +573,6 @@
 	</div>
 
 	<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
-	<script src="{% static 'styles/bootstrap-4.1.3/popper.js' %}"></script>
-	<script src="{% static 'styles/bootstrap-4.1.3/bootstrap.min.js' %}"></script>
 	<script src="{% static 'plugins/greensock/TweenMax.min.js' %}"></script>
 	<script src="{% static 'plugins/greensock/TimelineMax.min.js' %}"></script>
 	<script src="{% static 'plugins/scrollmagic/ScrollMagic.min.js' %}"></script>

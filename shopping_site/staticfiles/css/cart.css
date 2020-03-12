@@ -335,7 +335,7 @@ section
 .has_children:hover > .dropdown_text,
 .has_children ul .dropdown_text:hover
 {
-	color: #D6ED17FF;
+	color: #bbe432;
 }
 .dropdown_arrow
 {
@@ -382,7 +382,7 @@ section
 }
 .has_children:hover i
 {
-	color: #D6ED17FF;
+	color: #bbe432;
 }
 .has_children ul li:not(:last-child)
 {
@@ -414,14 +414,14 @@ section
 }
 .sidebar_logo a > div
 {
-	border: solid 2px #D6ED17FF;
+	border: solid 2px #bbe432;
 	padding-top: 13px;
 	padding-bottom: 13px;
 	text-align: center;
 	font-size: 48px;
 	font-weight: 700;
 	line-height: 0.75;
-	color: #D6ED17FF;
+	color: #bbe432;
 }
 .sidebar_logo a > div span
 {
@@ -466,11 +466,11 @@ section
 }
 .sidebar_nav ul li a:hover
 {
-	color: #D6ED17FF;
+	color: #bbe432;
 }
 .sidebar_nav ul li:hover a i
 {
-	color: #D6ED17FF;
+	color: #bbe432;
 	-webkit-transform: translateX(10px);
 	-moz-transform: translateX(10px);
 	-ms-transform: translateX(10px);
@@ -510,7 +510,7 @@ section
 .search_input:focus,
 .search_input:hover
 {
-	border-bottom: solid 1px #D6ED17FF;
+	border-bottom: solid 1px #bbe432;
 }
 .search_button
 {
@@ -532,7 +532,7 @@ section
 }
 .search_button:hover
 {
-	color: #D6ED17FF;
+	color: #bbe432;
 }
 .search_button:active
 {
@@ -608,7 +608,7 @@ section
 	width: 23px;
 	height: 23px;
 	border-radius: 50%;
-	background: #D6ED17FF;
+	background: #bbe432;
 	text-align: center;
 	line-height: 23px;
 	font-size: 12px;
@@ -662,14 +662,14 @@ section
 }
 .header_logo a > div
 {
-	border: solid 2px #D6ED17FF;
+	border: solid 2px #bbe432;
 	padding-top: 13px;
 	padding-bottom: 13px;
 	text-align: center;
 	font-size: 18px;
 	font-weight: 700;
 	line-height: 0.75;
-	color: #D6ED17FF;
+	color: #bbe432;
 	padding-left: 14px;
 	padding-right: 16px;
 }
@@ -706,7 +706,7 @@ section
 }
 .header_nav ul li a:hover
 {
-	color: #D6ED17FF;
+	color: #bbe432;
 }
 .header_extra
 {
@@ -749,7 +749,7 @@ section
 }
 .hamburger:hover i
 {
-	color: #D6ED17FF;
+	color: #bbe432;
 }
 
 /*********************************
@@ -818,7 +818,7 @@ section
 }
 .menu_close:hover div
 {
-	background: #D6ED17FF;
+	background: #bbe432;
 }
 .menu .logo
 {
@@ -844,7 +844,7 @@ section
 }
 .menu_nav ul li a:hover
 {
-	color: #D6ED17FF;
+	color: #bbe432;
 }
 .menu_search
 {
@@ -919,7 +919,7 @@ section
 .menu .search_input:focus,
 .menu .search_input:hover
 {
-	border-bottom: solid 2px #D6ED17FF;
+	border-bottom: solid 2px #bbe432;
 }
 .header_search_button
 {
@@ -949,7 +949,7 @@ section
 }
 .header_search_button:hover i
 {
-	color: #D6ED17FF;
+	color: #bbe432;
 }
 .menu_extra
 {
@@ -987,7 +987,7 @@ section
 }
 .menu_social ul li a i:hover
 {
-	color: #D6ED17FF;
+	color: #bbe432;
 }
 
 /*********************************
@@ -1159,7 +1159,7 @@ section
 }
 .product_name a:hover
 {
-	color: #D6ED17FF;
+	color: #bbe432;
 }
 .product_text
 {
@@ -1203,7 +1203,7 @@ section
 }
 .qty_button:hover
 {
-	color: #D6ED17FF;
+	color: #bbe432;
 }
 .qty_sub
 {
@@ -1244,7 +1244,7 @@ section
 }
 .button_continue
 {
-	background: #D6ED17FF;
+	background: #bbe432;
 }
 .button_continue:hover
 {
@@ -1252,7 +1252,7 @@ section
 }
 .button_continue:hover a
 {
-	color: #D6ED17FF;
+	color: #bbe432;
 }
 .button_clear
 {
@@ -1272,7 +1272,7 @@ section
 }
 .button_update:hover
 {
-	background: #D6ED17FF;
+	background: #bbe432;
 }
 .button_update:hover a
 {
@@ -1280,7 +1280,7 @@ section
 }
 .button_update a
 {
-	color: #D6ED17FF;
+	color: #bbe432;
 }
 .cart_extra_container
 {
@@ -1337,7 +1337,7 @@ section
 	right: 0;
 	width: 143px;
 	height: 52px;
-	background: #D6ED17FF;
+	background: #bbe432;
 	color: #414141;
 	text-transform: uppercase;
 	font-size: 14px;
@@ -1466,7 +1466,7 @@ section
 	width: 100%;
 	height: 60px;
 	text-align: center;
-	background: #D6ED17FF;
+	background: #bbe432;
 	margin-top: 86px;
 }
 .checkout_button a
@@ -1489,7 +1489,7 @@ section
 }
 .checkout_button:hover a
 {
-	color: #D6ED17FF;
+	color: #bbe432;
 }
 
 /*********************************
@@ -1545,7 +1545,7 @@ section
 .newsletter_input:hover,
 .newsletter_input:focus
 {
-	border-bottom: solid 2px #D6ED17FF;
+	border-bottom: solid 2px #bbe432;
 }
 .newsletter_button
 {
@@ -1554,7 +1554,7 @@ section
 	right: 0;
 	width: 138px;
 	height: 45px;
-	background: #D6ED17FF;
+	background: #bbe432;
 	color: #1a1a1a;
 	font-size: 14px;
 	font-weight: 700;
@@ -1628,14 +1628,14 @@ section
 }
 .footer_logo a > div
 {
-	border: solid 2px #D6ED17FF;
+	border: solid 2px #bbe432;
 	padding-top: 13px;
 	padding-bottom: 13px;
 	text-align: center;
 	font-size: 48px;
 	font-weight: 700;
 	line-height: 0.75;
-	color: #D6ED17FF;
+	color: #bbe432;
 	padding-left: 25px;
 	padding-right: 26px;
 }
@@ -1711,7 +1711,7 @@ section
 	width: 7px;
 	height: 7px;
 	background: transparent;
-	border: solid 2px #D6ED17FF;
+	border: solid 2px #bbe432;
 }
 .footer_list ul li:not(:last-child)
 {
@@ -1779,7 +1779,7 @@ section
 }
 .footer_blog_title a:hover
 {
-	color: #D6ED17FF;
+	color: #bbe432;
 }
 .footer_blog_date
 {
@@ -1798,7 +1798,7 @@ section
 {
 	font-size: 12px;
 	font-weight: 500;
-	color: #D6ED17FF;
+	color: #bbe432;
 }
 .footer_contact
 {
@@ -1818,7 +1818,7 @@ section
 {
 	font-size: 14px;
 	font-weight: 700;
-	color: #D6ED17FF;
+	color: #bbe432;
 }
 .footer_contact_list ul li div
 {
@@ -1858,7 +1858,7 @@ section
 }
 .footer_social_item:hover .footer_social_icon i
 {
-	color: #D6ED17FF;
+	color: #bbe432;
 }
 .footer_social_title
 {
