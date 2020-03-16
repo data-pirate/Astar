@@ -83,6 +83,25 @@
                                     </div>
                                     {% endif %}
                                     {% endfor %}
+                                    <div>
+                                        <strong class="black-text font-weight-bold">Please Upload Some Images of the
+                                            Product: </strong>
+                                    </div>
+                                    {{ formset.management_form }}
+                                    {% for field in formset %}
+                                    <div class="md-form">
+                                        <div class="file-field">
+                                            <div class="btn btn-rounded aqua-gradient btn-sm float-left">
+                                                <span>choose file</span>
+                                                {{ field }}
+                                            </div>
+                                            <div class="file-path-wrapper">
+                                                <input class="file-path validate" type="text"
+                                                    placeholder="Upload your file">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
                             </div>
 
                         </div>

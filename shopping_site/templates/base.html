@@ -1,596 +1,629 @@
 <!DOCTYPE html>
 <html lang="en">
 {% load cart_template_tags %}
+
 <head>
-	{%load static%}
-	<title>aStar</title>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="description" content="aStar Fashion Template Project">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
-	<link href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
-	<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.theme.default.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/animate.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/mdb.css' %}">
-	<script src="{% static 'js/jquery.js' %}"></script>
-	<link href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
-	<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"> -->
-	{% block head %}
-	{% endblock %}
+    {%load static%}
+    <title>aStar</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="aStar Fashion Template Project">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+    <link href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.theme.default.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/animate.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/mdb.css' %}">
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/fontawesome.js' %}"></script>
+    <link href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"> {% block head %} {% endblock %}
 </head>
 
 <body>
 
-	<div class="super_container">
+    <div class="super_container">
 
-		<!-- Header -->
+        <!-- Header -->
 
-		<header class="header">
-			<div class="header_content d-flex flex-row align-items-center justify-content-start">
+        <header class="header">
+            <div class="header_content d-flex flex-row align-items-center justify-content-start">
 
-				<!-- Hamburger -->
-				<div class="hamburger menu_mm"><i class="fa fa-bars menu_mm" aria-hidden="true"></i></div>
+                <!-- Hamburger -->
+                <div class="hamburger menu_mm"><i class="fa fa-bars menu_mm" aria-hidden="true"></i></div>
 
-				<!-- Logo -->
-				<div class="header_logo">
-					<a href="/">
-						<div>we<span>star</span></div>
-					</a>
-				</div>
+                <!-- Logo -->
+                <div class="header_logo">
+                    <a href="/">
+                        <div>we<span>star</span></div>
+                    </a>
+                </div>
 
-				<!-- Navigation -->
-				<nav class="header_nav">
-					<ul class="d-flex flex-row align-items-center justify-content-start">
-						<li><a href="#">home</a></li>
-						<li><a href="#">woman</a></li>
-						<li><a href="#">man</a></li>
-						<li><a href="#">lookbook</a></li>
-						<li><a href="#">blog</a></li>
-						<li><a href="#">contact</a></li>
-					</ul>
-				</nav>
+                <!-- Navigation -->
+                <nav class="header_nav">
+                    <ul class="d-flex flex-row align-items-center justify-content-start">
+                        <li><a href="{% url 'shop:index' %}">home</a></li>
+                        <li><a href="#">woman</a></li>
+                        <li><a href="#">man</a></li>
+                        <li><a href="{% url 'shop:myprofile' %}">profile</a></li>
+                        <li><a href="#">blog</a></li>
+                        <li><a href="#">contact</a></li>
+                    </ul>
+                </nav>
 
-				<!-- Header Extra -->
-				<div class="header_extra ml-auto d-flex flex-row align-items-center justify-content-start">
+                <!-- Header Extra -->
+                <div class="header_extra ml-auto d-flex flex-row align-items-center justify-content-start">
 
-					<!-- Language -->
-					<div class="info_languages has_children">
-						<div class="language_flag"><img src="{% static 'images/flag_1.svg' %}"
-								alt="https://www.flaticon.com/authors/freepik"></div>
-						<div class="dropdown_text">english</div>
-						<div class="dropdown_arrow"><i class="fa fa-angle-down" aria-hidden="true"></i></div>
+                    <!-- Language -->
+                    <div class="info_languages has_children">
+                        <div class="language_flag"><img src="{% static 'images/flag_1.svg' %}" alt="https://www.flaticon.com/authors/freepik"></div>
+                        <div class="dropdown_text">english</div>
+                        <div class="dropdown_arrow"><i class="fa fa-angle-down" aria-hidden="true"></i></div>
 
-						<!-- Language Dropdown Menu -->
-						<ul>
-							<li><a href="#">
-									<div class="language_flag"><img src="{% static 'images/flag_2.svg' %}"
-											alt="https://www.flaticon.com/authors/freepik"></div>
-									<div class="dropdown_text">french</div>
-								</a></li>
-							<li><a href="#">
-									<div class="language_flag"><img src="{% static 'images/flag_3.svg' %}"
-											alt="https://www.flaticon.com/authors/freepik"></div>
-									<div class="dropdown_text">japanese</div>
-								</a></li>
-							<li><a href="#">
-									<div class="language_flag"><img src="{% static 'images/flag_4.svg' %}"
-											alt="https://www.flaticon.com/authors/freepik"></div>
-									<div class="dropdown_text">russian</div>
-								</a></li>
-							<li><a href="#">
-									<div class="language_flag"><img src="{% static 'images/flag_5.svg' %}"
-											alt="https://www.flaticon.com/authors/freepik"></div>
-									<div class="dropdown_text">spanish</div>
-								</a></li>
-						</ul>
+                        <!-- Language Dropdown Menu -->
+                        <ul>
+                            <li>
+                                <a href="#">
+                                    <div class="language_flag"><img src="{% static 'images/flag_2.svg' %}" alt="https://www.flaticon.com/authors/freepik"></div>
+                                    <div class="dropdown_text">french</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="language_flag"><img src="{% static 'images/flag_3.svg' %}" alt="https://www.flaticon.com/authors/freepik"></div>
+                                    <div class="dropdown_text">japanese</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="language_flag"><img src="{% static 'images/flag_4.svg' %}" alt="https://www.flaticon.com/authors/freepik"></div>
+                                    <div class="dropdown_text">russian</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="language_flag"><img src="{% static 'images/flag_5.svg' %}" alt="https://www.flaticon.com/authors/freepik"></div>
+                                    <div class="dropdown_text">spanish</div>
+                                </a>
+                            </li>
+                        </ul>
 
-					</div>
+                    </div>
 
-					<!-- Currency -->
-					<div class="info_currencies has_children">
-						<div class="dropdown_text">usd</div>
-						<div class="dropdown_arrow"><i class="fa fa-angle-down" aria-hidden="true"></i></div>
+                    <!-- Currency -->
+                    <div class="info_currencies has_children">
+                        <div class="dropdown_text">usd</div>
+                        <div class="dropdown_arrow"><i class="fa fa-angle-down" aria-hidden="true"></i></div>
 
-						<!-- Currencies Dropdown Menu -->
-						<ul>
-							<li><a href="#">
-									<div class="dropdown_text">EUR</div>
-								</a></li>
-							<li><a href="#">
-									<div class="dropdown_text">YEN</div>
-								</a></li>
-							<li><a href="#">
-									<div class="dropdown_text">GBP</div>
-								</a></li>
-							<li><a href="#">
-									<div class="dropdown_text">CAD</div>
-								</a></li>
-						</ul>
+                        <!-- Currencies Dropdown Menu -->
+                        <ul>
+                            <li>
+                                <a href="#">
+                                    <div class="dropdown_text">EUR</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="dropdown_text">YEN</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="dropdown_text">GBP</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="dropdown_text">CAD</div>
+                                </a>
+                            </li>
+                        </ul>
 
-					</div>
+                    </div>
 
-					<!-- Cart -->
-					{% if request.user.is_authenticated %}
-					<div class="cart d-flex flex-row align-items-center justify-content-start">
-						<div class="cart_icon"><a href="{% url 'shop:cart_summary' %}">
-								<img src="{% static 'images/bag.png' %}" alt="">
-								<div class="cart_num">{{ request.user|cart_count }}</div>
-							</a></div>
-					</div>
-					{% else %}
-					<div class="cart d-flex flex-row align-items-center justify-content-start">
-						<div class="cart_text"><a href="{% url 'account_login' %}">
-								Login/signup
-						</div>
-						</a>
-					</div>
-					<div class="cart d-flex flex-row align-items-center justify-content-start">
-						<div class="cart_text"><a href="{% url 'account_signup' %}">
-								Signup
+                    <!-- Cart -->
+                    {% if request.user.is_authenticated %}
+                    <div class="cart d-flex flex-row align-items-center justify-content-start">
+                        <div class="cart_text">Logout</div>
+                    </div>
+                    <div class="cart d-flex flex-row align-items-center justify-content-start">
+                        <div class="cart_icon">
+                            <a href="{% url 'shop:cart_summary' %}">
+                                <img src="{% static 'images/bag.png' %}" alt="">
+                                <div class="cart_num">{{ request.user|cart_count }}</div>
+                            </a>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="cart d-flex flex-row align-items-center justify-content-start">
+                        <div class="cart_text"><a href="{% url 'account_login' %}">
+                                Login
+                        </div>
+                        </a>
+                        </div>
+                        <div class="cart d-flex flex-row align-items-center justify-content-start">
+                            <div class="cart_text"><a href="{% url 'account_signup' %}">
+                                Signup
 
-						</div>
-						</a>
-					</div>
-					{% endif %}
+                        </div>
+                        </a>
+                            </div>
+                            {% endif %}
 
-				</div>
+                        </div>
 
-			</div>
-		</header>
+                    </div>
+        </header>
 
-		<!-- Menu -->
+        <!-- Menu -->
 
-		<div class="menu d-flex flex-column align-items-start justify-content-start menu_mm trans_400">
-			<div class="menu_close_container">
-				<div class="menu_close">
-					<div></div>
-					<div></div>
-				</div>
-			</div>
-			<div class="menu_top d-flex flex-row align-items-center justify-content-start">
+        <div class="menu d-flex flex-column align-items-start justify-content-start menu_mm trans_400">
+            <div class="menu_close_container">
+                <div class="menu_close">
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+            <div class="menu_top d-flex flex-row align-items-center justify-content-start">
 
-				<!-- Language -->
-				<div class="info_languages has_children">
-					<div class="language_flag"><img src="{% static 'images/flag_1.svg' %}"
-							alt="https://www.flaticon.com/authors/freepik"></div>
-					<div class="dropdown_text">english</div>
-					<div class="dropdown_arrow"><i class="fa fa-angle-down" aria-hidden="true"></i></div>
+                <!-- Language -->
+                <div class="info_languages has_children">
+                    <div class="language_flag"><img src="{% static 'images/flag_1.svg' %}" alt="https://www.flaticon.com/authors/freepik"></div>
+                    <div class="dropdown_text">english</div>
+                    <div class="dropdown_arrow"><i class="fa fa-angle-down" aria-hidden="true"></i></div>
 
-					<!-- Language Dropdown Menu -->
-					<ul>
-						<li><a href="#">
-								<div class="language_flag"><img src="{% static 'images/flag_2.svg' %}"
-										alt="https://www.flaticon.com/authors/freepik"></div>
-								<div class="dropdown_text">french</div>
-							</a></li>
-						<li><a href="#">
-								<div class="language_flag"><img src="{% static 'images/flag_3.svg' %}"
-										alt="https://www.flaticon.com/authors/freepik"></div>
-								<div class="dropdown_text">japanese</div>
-							</a></li>
-						<li><a href="#">
-								<div class="language_flag"><img src="{% static 'images/flag_4.svg' %}"
-										alt="https://www.flaticon.com/authors/freepik"></div>
-								<div class="dropdown_text">russian</div>
-							</a></li>
-						<li><a href="#">
-								<div class="language_flag"><img src="{% static 'images/flag_5.svg' %}"
-										alt="https://www.flaticon.com/authors/freepik"></div>
-								<div class="dropdown_text">spanish</div>
-							</a></li>
-					</ul>
+                    <!-- Language Dropdown Menu -->
+                    <ul>
+                        <li>
+                            <a href="#">
+                                <div class="language_flag"><img src="{% static 'images/flag_2.svg' %}" alt="https://www.flaticon.com/authors/freepik"></div>
+                                <div class="dropdown_text">french</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="language_flag"><img src="{% static 'images/flag_3.svg' %}" alt="https://www.flaticon.com/authors/freepik"></div>
+                                <div class="dropdown_text">japanese</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="language_flag"><img src="{% static 'images/flag_4.svg' %}" alt="https://www.flaticon.com/authors/freepik"></div>
+                                <div class="dropdown_text">russian</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="language_flag"><img src="{% static 'images/flag_5.svg' %}" alt="https://www.flaticon.com/authors/freepik"></div>
+                                <div class="dropdown_text">spanish</div>
+                            </a>
+                        </li>
+                    </ul>
 
-				</div>
+                </div>
 
-				<!-- Currency -->
-				<div class="info_currencies has_children">
-					<div class="dropdown_text">usd</div>
-					<div class="dropdown_arrow"><i class="fa fa-angle-down" aria-hidden="true"></i></div>
+                <!-- Currency -->
+                <div class="info_currencies has_children">
+                    <div class="dropdown_text">usd</div>
+                    <div class="dropdown_arrow"><i class="fa fa-angle-down" aria-hidden="true"></i></div>
 
-					<!-- Currencies Dropdown Menu -->
-					<ul>
-						<li><a href="#">
-								<div class="dropdown_text">EUR</div>
-							</a></li>
-						<li><a href="#">
-								<div class="dropdown_text">YEN</div>
-							</a></li>
-						<li><a href="#">
-								<div class="dropdown_text">GBP</div>
-							</a></li>
-						<li><a href="#">
-								<div class="dropdown_text">CAD</div>
-							</a></li>
-					</ul>
+                    <!-- Currencies Dropdown Menu -->
+                    <ul>
+                        <li>
+                            <a href="#">
+                                <div class="dropdown_text">EUR</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="dropdown_text">YEN</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="dropdown_text">GBP</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="dropdown_text">CAD</div>
+                            </a>
+                        </li>
+                    </ul>
 
-				</div>
+                </div>
 
-			</div>
-			<div class="menu_search">
-				<form action="/s/" class="header_search_form menu_mm">
-					<input type="search" class="search_input menu_mm" name="q" placeholder="Search" required="required">
-					<button
-						class="header_search_button d-flex flex-column align-items-center justify-content-center menu_mm">
-						<i class="fa fa-search menu_mm" aria-hidden="true"></i>
-					</button>
-				</form>
-			</div>
-			<nav class="menu_nav">
-				<ul class="menu_mm">
-					<li class="menu_mm"><a href="#">home</a></li>
-					<li class="menu_mm"><a href="#">woman</a></li>
-					<li class="menu_mm"><a href="#">man</a></li>
-					<li class="menu_mm"><a href="#">lookbook</a></li>
-					<li class="menu_mm"><a href="#">blog</a></li>
-					<li class="menu_mm"><a href="#">contact</a></li>
-				</ul>
-			</nav>
-			<div class="menu_extra">
-				<div class="menu_social">
-					<ul>
-						<li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-						<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-						<li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-						<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
+            </div>
+            <div class="menu_search">
+                <form action="/s/" class="header_search_form menu_mm">
+                    <input type="search" class="search_input menu_mm" name="q" placeholder="Search" required="required">
+                    <button class="header_search_button d-flex flex-column align-items-center justify-content-center menu_mm">
+                        <i class="fa fa-search menu_mm" aria-hidden="true"></i>
+                    </button>
+                </form>
+            </div>
+            <nav class="menu_nav">
+                <ul class="menu_mm">
+                    <li class="menu_mm"><a href="{% url 'shop:index' %}">home</a></li>
+                    <li class="menu_mm"><a href="#">woman</a></li>
+                    <li class="menu_mm"><a href="#">man</a></li>
+                    <li class="menu_mm"><a href="{% url 'shop:myprofile' %}">Profile</a></li>
+                    <li class="menu_mm"><a href="#">blog</a></li>
+                    <li class="menu_mm"><a href="#">contact</a></li>
+                </ul>
+            </nav>
+            <div class="menu_extra">
+                <div class="menu_social">
+                    <ul>
+                        <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
-		<!-- Sidebar -->
+        <!-- Sidebar -->
 
-		<div class="sidebar">
+        <div class="sidebar">
 
-			<!-- Info -->
-			<div class="info">
-				<div class="info_content d-flex flex-row align-items-center justify-content-start">
+            <!-- Info -->
+            <div class="info">
+                <div class="info_content d-flex flex-row align-items-center justify-content-start">
 
-					<!-- Language -->
-					<div class="info_languages has_children">
-						<div class="language_flag"><img src="{% static 'images/flag_1.svg' %}"
-								alt="https://www.flaticon.com/authors/freepik"></div>
-						<div class="dropdown_text">english</div>
-						<div class="dropdown_arrow"><i class="fa fa-angle-down" aria-hidden="true"></i></div>
+                    <!-- Language -->
+                    <div class="info_languages has_children">
+                        <div class="language_flag"><img src="{% static 'images/flag_1.svg' %}" alt="https://www.flaticon.com/authors/freepik"></div>
+                        <div class="dropdown_text">english</div>
+                        <div class="dropdown_arrow"><i class="fa fa-angle-down" aria-hidden="true"></i></div>
 
-						<!-- Language Dropdown Menu -->
-						<ul>
-							<li><a href="#">
-									<div class="language_flag"><img src="{% static 'images/flag_2.svg' %}"
-											alt="https://www.flaticon.com/authors/freepik"></div>
-									<div class="dropdown_text">french</div>
-								</a></li>
-							<li><a href="#">
-									<div class="language_flag"><img src="{% static 'images/flag_3.svg' %}"
-											alt="https://www.flaticon.com/authors/freepik"></div>
-									<div class="dropdown_text">japanese</div>
-								</a></li>
-							<li><a href="#">
-									<div class="language_flag"><img src="{% static 'images/flag_4.svg' %}"
-											alt="https://www.flaticon.com/authors/freepik"></div>
-									<div class="dropdown_text">russian</div>
-								</a></li>
-							<li><a href="#">
-									<div class="language_flag"><img src="{% static 'images/flag_5.svg' %}"
-											alt="https://www.flaticon.com/authors/freepik"></div>
-									<div class="dropdown_text">spanish</div>
-								</a></li>
-						</ul>
+                        <!-- Language Dropdown Menu -->
+                        <ul>
+                            <li>
+                                <a href="#">
+                                    <div class="language_flag"><img src="{% static 'images/flag_2.svg' %}" alt="https://www.flaticon.com/authors/freepik"></div>
+                                    <div class="dropdown_text">french</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="language_flag"><img src="{% static 'images/flag_3.svg' %}" alt="https://www.flaticon.com/authors/freepik"></div>
+                                    <div class="dropdown_text">japanese</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="language_flag"><img src="{% static 'images/flag_4.svg' %}" alt="https://www.flaticon.com/authors/freepik"></div>
+                                    <div class="dropdown_text">russian</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="language_flag"><img src="{% static 'images/flag_5.svg' %}" alt="https://www.flaticon.com/authors/freepik"></div>
+                                    <div class="dropdown_text">spanish</div>
+                                </a>
+                            </li>
+                        </ul>
 
-					</div>
+                    </div>
 
-					<!-- Currency -->
-					<div class="info_currencies has_children">
-						<div class="dropdown_text">usd</div>
-						<div class="dropdown_arrow"><i class="fa fa-angle-down" aria-hidden="true"></i></div>
+                    <!-- Currency -->
+                    <div class="info_currencies has_children">
+                        <div class="dropdown_text">usd</div>
+                        <div class="dropdown_arrow"><i class="fa fa-angle-down" aria-hidden="true"></i></div>
 
-						<!-- Currencies Dropdown Menu -->
-						<ul>
-							<li><a href="#">
-									<div class="dropdown_text">EUR</div>
-								</a></li>
-							<li><a href="#">
-									<div class="dropdown_text">YEN</div>
-								</a></li>
-							<li><a href="#">
-									<div class="dropdown_text">GBP</div>
-								</a></li>
-							<li><a href="#">
-									<div class="dropdown_text">CAD</div>
-								</a></li>
-						</ul>
+                        <!-- Currencies Dropdown Menu -->
+                        <ul>
+                            <li>
+                                <a href="#">
+                                    <div class="dropdown_text">EUR</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="dropdown_text">YEN</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="dropdown_text">GBP</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="dropdown_text">CAD</div>
+                                </a>
+                            </li>
+                        </ul>
 
-					</div>
+                    </div>
 
-				</div>
-			</div>
+                </div>
+            </div>
 
-			<!-- Logo -->
-			<div class="sidebar_logo">
-				<a href="/">
-					<div>we<span>star</span></div>
-				</a>
-			</div>
+            <!-- Logo -->
+            <div class="sidebar_logo">
+                <a href="{% url 'shop:index' %}">
+                    <div>we<span>star</span></div>
+                </a>
+            </div>
 
-			<!-- Sidebar Navigation -->
-			<nav class="sidebar_nav">
-				<ul>
-					<li><a href="#">home<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-					<li><a href="#">woman<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-					<li><a href="#">man<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-					<li><a href="#">lookbook<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-					<li><a href="#">blog<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-					<li><a href="#">contact<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-				</ul>
-			</nav>
+            <!-- Sidebar Navigation -->
+            <nav class="sidebar_nav">
+                <ul>
+                    <li><a href="{% url 'shop:index' %}">home<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                    <li><a href="#">woman<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                    <li><a href="#">man<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                    <li><a href="{% url 'shop:myprofile' %}">Profile<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                    <li><a href="#">blog<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                    <li><a href="#">contact<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                </ul>
+            </nav>
 
-			<!-- Search -->
-			<div class="search">
-				<form action="/s/" class="search_form" id="sidebar_search_form">
-					<input type="text" class="search_input" name='q' placeholder="Search" required="required">
-					<button class="search_button"><i class="fa fa-search" aria-hidden="true"></i></button>
-				</form>
-			</div>
+            <!-- Search -->
+            <div class="search">
+                <form action="/s/" class="search_form" id="sidebar_search_form">
+                    <input type="text" class="search_input" name='q' placeholder="Search" required="required">
+                    <button class="search_button"><i class="fa fa-search" aria-hidden="true"></i></button>
+                </form>
+            </div>
 
-			<!-- Cart -->
-			{% if request.user.is_authenticated %}
-			<div class="cart d-flex flex-row align-items-center justify-content-start">
-				<div class="cart_icon"><a href="{% url 'shop:cart_summary' %}">
-						<img src="{% static 'images/bag.png' %}" alt="">
-						<div class="cart_num">{{ request.user|cart_count }}</div>
-					</a></div>
-				<div class="cart_text">bag</div>
-				<a class="cart_price"><span>$ 39.99 </span>({{ request.user|cart_count }})</a>
-			</div>	
-			{% else %}
-			<div class="cart d-flex flex-row align-items-center justify-content-start">
-						<div class="cart_text"><a href="{% url 'account_login' %}">Login</a></div>
-						<div class="cart_text"><a href="{% url 'account_signup' %}">Signup</a></div>
-			</div>
-			{% endif %}
-		</div>
+            <!-- Cart -->
+            {% if request.user.is_authenticated %}
+            <div class="cart d-flex flex-row align-items-center justify-content-start">
+                <div class="cart_icon">
+                    <a href="{% url 'shop:cart_summary' %}">
+                        <img src="{% static 'images/bag.png' %}" alt="">
+                        <div class="cart_num">{{ request.user|cart_count }}</div>
+                    </a>
+                </div>
+                <div class="cart_text">bag</div>
+                <a class="cart_text" href="{% url 'account_logout' %}"> Logout </a>
+            </div>
+            {% else %}
+            <div class="cart d-flex flex-row align-items-center justify-content-start">
+                <div class="cart_text"><a href="{% url 'account_login' %}">Login</a></div>
+                <div class="cart_text"><a href="{% url 'account_signup' %}">Signup</a></div>
+            </div>
+            {% endif %}
+        </div>
 
-		<!-- Home -->
-		{% block content %}
-		
-		{% endblock %}
+        <!-- Home -->
+        {% block content %}
+        {% endblock %}
 
-		<!-- Footer -->
+        <!-- Footer -->
 
-		<footer class="footer">
-			<div class="footer_content">
-				<div class="section_container">
-					<div class="container">
-						<div class="row">
+        <footer class="footer">
+            <div class="footer_content">
+                <div class="section_container">
+                    <div class="container">
+                        <div class="row">
 
-							<!-- About -->
-							<div class="col-xxl-3 col-md-6 footer_col">
-								<div class="footer_about">
-									<!-- Logo -->
-									<div class="footer_logo">
-										<a href="#">
-											<div>a<span>star</span></div>
-										</a>
-									</div>
-									<div class="footer_about_text">
-										<p>Donec vitae purus nunc. Morbi faucibus erat sit amet congue mattis. Nullam
-											fringilla faucibus urna, id dapibus erat iaculis ut. Integer ac sem.</p>
-									</div>
-									<div class="cards">
-										<ul class="d-flex flex-row align-items-center justify-content-start">
-											<li><a href="#"><img src="{% static 'images/card_1.jpg' %}" alt=""></a></li>
-											<li><a href="#"><img src="{% static 'images/card_2.jpg' %}" alt=""></a></li>
-											<li><a href="#"><img src="{% static 'images/card_3.jpg' %}" alt=""></a></li>
-											<li><a href="#"><img src="{% static 'images/card_4.jpg' %}" alt=""></a></li>
-											<li><a href="#"><img src="{% static 'images/card_5.jpg' %}" alt=""></a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
+                            <!-- About -->
+                            <div class="col-xxl-3 col-md-6 footer_col">
+                                <div class="footer_about">
+                                    <!-- Logo -->
+                                    <div class="footer_logo">
+                                        <a href="#">
+                                            <div>a<span>star</span></div>
+                                        </a>
+                                    </div>
+                                    <div class="footer_about_text">
+                                        <p>Donec vitae purus nunc. Morbi faucibus erat sit amet congue mattis. Nullam fringilla faucibus urna, id dapibus erat iaculis ut. Integer ac sem.</p>
+                                    </div>
+                                    <div class="cards">
+                                        <ul class="d-flex flex-row align-items-center justify-content-start">
+                                            <li>
+                                                <a href="#"><img src="{% static 'images/card_1.jpg' %}" alt=""></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><img src="{% static 'images/card_2.jpg' %}" alt=""></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><img src="{% static 'images/card_3.jpg' %}" alt=""></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><img src="{% static 'images/card_4.jpg' %}" alt=""></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><img src="{% static 'images/card_5.jpg' %}" alt=""></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
 
-							<!-- Questions -->
-							<div class="col-xxl-3 col-md-6 footer_col">
-								<div class="footer_questions">
-									<div class="footer_title">questions</div>
-									<div class="footer_list">
-										<ul>
-											<li><a href="#">About us</a></li>
-											<li><a href="#">Track Orders</a></li>
-											<li><a href="#">Returns</a></li>
-											<li><a href="#">Jobs</a></li>
-											<li><a href="#">Shipping</a></li>
-											<li><a href="#">Blog</a></li>
-											<li><a href="#">Partners</a></li>
-											<li><a href="#">Bloggers</a></li>
-											<li><a href="#">Support</a></li>
-											<li><a href="#">Terms of Use</a></li>
-											<li><a href="#">Press</a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
+                            <!-- Questions -->
+                            <div class="col-xxl-3 col-md-6 footer_col">
+                                <div class="footer_questions">
+                                    <div class="footer_title">questions</div>
+                                    <div class="footer_list">
+                                        <ul>
+                                            <li><a href="#">About us</a></li>
+                                            <li><a href="#">Track Orders</a></li>
+                                            <li><a href="#">Returns</a></li>
+                                            <li><a href="#">Jobs</a></li>
+                                            <li><a href="#">Shipping</a></li>
+                                            <li><a href="#">Blog</a></li>
+                                            <li><a href="#">Partners</a></li>
+                                            <li><a href="#">Bloggers</a></li>
+                                            <li><a href="#">Support</a></li>
+                                            <li><a href="#">Terms of Use</a></li>
+                                            <li><a href="#">Press</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
 
-							<!-- Blog -->
-							<div class="col-xxl-3 col-md-6 footer_col">
-								<div class="footer_blog">
-									<div class="footer_title">blog</div>
-									<div class="footer_blog_container">
+                            <!-- Blog -->
+                            <div class="col-xxl-3 col-md-6 footer_col">
+                                <div class="footer_blog">
+                                    <div class="footer_title">blog</div>
+                                    <div class="footer_blog_container">
 
-										<!-- Blog Item -->
-										<div
-											class="footer_blog_item d-flex flex-row align-items-start justify-content-start">
-											<div class="footer_blog_image"><a href="blog"><img
-														src="{% static 'images/footer_blog_1.jpg' %}" alt=""></a></div>
-											<div class="footer_blog_content">
-												<div class="footer_blog_title"><a href="blog">what shoes to
-														wear</a></div>
-												<div class="footer_blog_date">june 06, 2018</div>
-												<div class="footer_blog_link"><a href="blog">Read More</a></div>
-											</div>
-										</div>
+                                        <!-- Blog Item -->
+                                        <div class="footer_blog_item d-flex flex-row align-items-start justify-content-start">
+                                            <div class="footer_blog_image">
+                                                <a href="blog"><img src="{% static 'images/footer_blog_1.jpg' %}" alt=""></a>
+                                            </div>
+                                            <div class="footer_blog_content">
+                                                <div class="footer_blog_title"><a href="blog">what shoes to
+                                                        wear</a></div>
+                                                <div class="footer_blog_date">june 06, 2018</div>
+                                                <div class="footer_blog_link"><a href="blog">Read More</a></div>
+                                            </div>
+                                        </div>
 
-										<!-- Blog Item -->
-										<div
-											class="footer_blog_item d-flex flex-row align-items-start justify-content-start">
-											<div class="footer_blog_image"><a href="blog"><img
-														src="{% static 'images/footer_blog_2.jpg' %}" alt=""></a></div>
-											<div class="footer_blog_content">
-												<div class="footer_blog_title"><a href="blog">trends this year</a>
-												</div>
-												<div class="footer_blog_date">june 06, 2018</div>
-												<div class="footer_blog_link"><a href="blog">Read More</a></div>
-											</div>
-										</div>
+                                        <!-- Blog Item -->
+                                        <div class="footer_blog_item d-flex flex-row align-items-start justify-content-start">
+                                            <div class="footer_blog_image">
+                                                <a href="blog"><img src="{% static 'images/footer_blog_2.jpg' %}" alt=""></a>
+                                            </div>
+                                            <div class="footer_blog_content">
+                                                <div class="footer_blog_title"><a href="blog">trends this year</a>
+                                                </div>
+                                                <div class="footer_blog_date">june 06, 2018</div>
+                                                <div class="footer_blog_link"><a href="blog">Read More</a></div>
+                                            </div>
+                                        </div>
 
-									</div>
-								</div>
-							</div>
+                                    </div>
+                                </div>
+                            </div>
 
-							<!-- Contact -->
-							<div class="col-xxl-3 col-md-6 footer_col">
-								<div class="footer_contact">
-									<div class="footer_title">contact</div>
-									<div class="footer_contact_list">
-										<ul>
-											<li class="d-flex flex-row align-items-start justify-content-start">
-												<span>C.</span>
-												<div>New Future Ltd</div>
-											</li>
-											<li class="d-flex flex-row align-items-start justify-content-start">
-												<span>A.</span>
-												<div>143604 Dera Baba Nanak, Punjab, India</div>
-											</li>
-											<li class="d-flex flex-row align-items-start justify-content-start">
-												<span>T.</span>
-												<div>+91 9876543210</div>
-											</li>
-											<li class="d-flex flex-row align-items-start justify-content-start">
-												<span>E.</span>
-												<div>dmnprt4@gmail.com</div>
-											</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+                            <!-- Contact -->
+                            <div class="col-xxl-3 col-md-6 footer_col">
+                                <div class="footer_contact">
+                                    <div class="footer_title">contact</div>
+                                    <div class="footer_contact_list">
+                                        <ul>
+                                            <li class="d-flex flex-row align-items-start justify-content-start">
+                                                <span>C.</span>
+                                                <div>New Future Ltd</div>
+                                            </li>
+                                            <li class="d-flex flex-row align-items-start justify-content-start">
+                                                <span>A.</span>
+                                                <div>143604 Dera Baba Nanak, Punjab, India</div>
+                                            </li>
+                                            <li class="d-flex flex-row align-items-start justify-content-start">
+                                                <span>T.</span>
+                                                <div>+91 9876543210</div>
+                                            </li>
+                                            <li class="d-flex flex-row align-items-start justify-content-start">
+                                                <span>E.</span>
+                                                <div>dmnprt4@gmail.com</div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-			<!-- Social -->
-			<div class="footer_social">
-				<div class="section_container">
-					<div class="container">
-						<div class="row">
-							<div class="col">
-								<div
-									class="footer_social_container d-flex flex-row align-items-center justify-content-between">
-									<!-- Instagram -->
-									<a href="#">
-										<div
-											class="footer_social_item d-flex flex-row align-items-center justify-content-start">
-											<div class="footer_social_icon"><i class="fa fa-instagram"
-													aria-hidden="true"></i></div>
-											<div class="footer_social_title">instagram</div>
-										</div>
-									</a>
-									<!-- Pinterest -->
-									<a href="#">
-										<div
-											class="footer_social_item d-flex flex-row align-items-center justify-content-start">
-											<div class="footer_social_icon"><i class="fa fa-pinterest"
-													aria-hidden="true"></i></div>
-											<div class="footer_social_title">pinterest</div>
-										</div>
-									</a>
-									<!-- Facebook -->
-									<a href="#">
-										<div
-											class="footer_social_item d-flex flex-row align-items-center justify-content-start">
-											<div class="footer_social_icon"><i class="fa fa-facebook"
-													aria-hidden="true"></i></div>
-											<div class="footer_social_title">facebook</div>
-										</div>
-									</a>
-									<!-- Twitter -->
-									<a href="#">
-										<div
-											class="footer_social_item d-flex flex-row align-items-center justify-content-start">
-											<div class="footer_social_icon"><i class="fa fa-twitter"
-													aria-hidden="true"></i></div>
-											<div class="footer_social_title">twitter</div>
-										</div>
-									</a>
-									<!-- YouTube -->
-									<a href="#">
-										<div
-											class="footer_social_item d-flex flex-row align-items-center justify-content-start">
-											<div class="footer_social_icon"><i class="fa fa-youtube"
-													aria-hidden="true"></i></div>
-											<div class="footer_social_title">youtube</div>
-										</div>
-									</a>
-									<!-- Tumblr -->
-									<a href="#">
-										<div
-											class="footer_social_item d-flex flex-row align-items-center justify-content-start">
-											<div class="footer_social_icon"><i class="fa fa-tumblr-square"
-													aria-hidden="true"></i></div>
-											<div class="footer_social_title">tumblr</div>
-										</div>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+            <!-- Social -->
+            <div class="footer_social">
+                <div class="section_container">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="footer_social_container d-flex flex-row align-items-center justify-content-between">
+                                    <!-- Instagram -->
+                                    <a href="#">
+                                        <div class="footer_social_item d-flex flex-row align-items-center justify-content-start">
+                                            <div class="footer_social_icon"><i class="fa fa-instagram" aria-hidden="true"></i></div>
+                                            <div class="footer_social_title">instagram</div>
+                                        </div>
+                                    </a>
+                                    <!-- Pinterest -->
+                                    <a href="#">
+                                        <div class="footer_social_item d-flex flex-row align-items-center justify-content-start">
+                                            <div class="footer_social_icon"><i class="fa fa-pinterest" aria-hidden="true"></i></div>
+                                            <div class="footer_social_title">pinterest</div>
+                                        </div>
+                                    </a>
+                                    <!-- Facebook -->
+                                    <a href="#">
+                                        <div class="footer_social_item d-flex flex-row align-items-center justify-content-start">
+                                            <div class="footer_social_icon"><i class="fa fa-facebook" aria-hidden="true"></i></div>
+                                            <div class="footer_social_title">facebook</div>
+                                        </div>
+                                    </a>
+                                    <!-- Twitter -->
+                                    <a href="#">
+                                        <div class="footer_social_item d-flex flex-row align-items-center justify-content-start">
+                                            <div class="footer_social_icon"><i class="fa fa-twitter" aria-hidden="true"></i></div>
+                                            <div class="footer_social_title">twitter</div>
+                                        </div>
+                                    </a>
+                                    <!-- YouTube -->
+                                    <a href="#">
+                                        <div class="footer_social_item d-flex flex-row align-items-center justify-content-start">
+                                            <div class="footer_social_icon"><i class="fa fa-youtube" aria-hidden="true"></i></div>
+                                            <div class="footer_social_title">youtube</div>
+                                        </div>
+                                    </a>
+                                    <!-- Tumblr -->
+                                    <a href="#">
+                                        <div class="footer_social_item d-flex flex-row align-items-center justify-content-start">
+                                            <div class="footer_social_icon"><i class="fa fa-tumblr-square" aria-hidden="true"></i></div>
+                                            <div class="footer_social_title">tumblr</div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-			<!-- Credits -->
-			<div class="credits">
-				<div class="section_container">
-					<div class="container">
-						<div class="row">
-							<div class="col">
-								<div class="credits_content d-flex flex-row align-items-center justify-content-end">
-									<div class="credits_text">
-										Copyright &copy;
-										<script>document.write(new Date().getFullYear());</script> All rights reserved |
-										Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by
-										<a href="https://instagram.com/its_damanpreet" target="_blank">damanpreet</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</footer>
+            <!-- Credits -->
+            <div class="credits">
+                <div class="section_container">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="credits_content d-flex flex-row align-items-center justify-content-end">
+                                    <div class="credits_text">
+                                        Copyright &copy;
+                                        <script>
+                                            document.write(new Date().getFullYear());
+                                        </script> All rights reserved | Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by
+                                        <a href="https://instagram.com/its_damanpreet" target="_blank">damanpreet</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
 
-	</div>
+        </div>
 
-	<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
-	<script src="{% static 'plugins/greensock/TweenMax.min.js' %}"></script>
-	<script src="{% static 'plugins/greensock/TimelineMax.min.js' %}"></script>
-	<script src="{% static 'plugins/scrollmagic/ScrollMagic.min.js' %}"></script>
-	<script src="{% static 'plugins/greensock/animation.gsap.min.js' %}"></script>
-	<script src="{% static 'plugins/greensock/ScrollToPlugin.min.js' %}"></script>
-	<script src="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.js' %}"></script>
-	<script src="{% static 'plugins/easing/easing.js' %}"></script>
-	<script src="{% static 'plugins/parallax-js-master/parallax.min.js' %}"></script>
-	<script src="{% static 'plugins/Isotope/isotope.pkgd.min.js' %}"></script>
-	<script src="{% static 'plugins/Isotope/fitcolumns.js' %}"></script>
-	<script src="{% static 'js/custom.js' %}"></script>
-	<script src="{% static 'js/popper.js' %}"></script>
-	<script src="{% static 'js/bootstrap.js' %}"></script>
-	<script type="text/javascript" src="{% static 'js/mdb.js' %}"></script>
+        <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+        <script src="{% static 'plugins/greensock/TweenMax.min.js' %}"></script>
+        <script src="{% static 'plugins/greensock/TimelineMax.min.js' %}"></script>
+        <script src="{% static 'plugins/scrollmagic/ScrollMagic.min.js' %}"></script>
+        <script src="{% static 'plugins/greensock/animation.gsap.min.js' %}"></script>
+        <script src="{% static 'plugins/greensock/ScrollToPlugin.min.js' %}"></script>
+        <script src="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.js' %}"></script>
+        <script src="{% static 'plugins/easing/easing.js' %}"></script>
+        <script src="{% static 'plugins/parallax-js-master/parallax.min.js' %}"></script>
+        <script src="{% static 'plugins/Isotope/isotope.pkgd.min.js' %}"></script>
+        <script src="{% static 'plugins/Isotope/fitcolumns.js' %}"></script>
+        <script src="{% static 'js/custom.js' %}"></script>
+        <script src="{% static 'js/popper.js' %}"></script>
+        <script src="{% static 'js/bootstrap.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/mdb.js' %}"></script>
 
-	{% block js %}
-
-	{% endblock %}
+        {% block js %} {% endblock %}
 </body>
 
 </html>

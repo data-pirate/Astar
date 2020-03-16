@@ -19,4 +19,8 @@ urlpatterns = [
     path('s/', views.search, name='search'),
     path('add_product/', views.add_product, name='add_product'),
     path('<id>/edit_product/', views.edit_product, name='edit_product'),
+    path('<id>/delete_product/', views.delete_product, name='delete_product'),
+    # path('accounts/edit_profile/', views.edit_profile, name='edit_profile'),
+    # to be deleted
+    path('accounts/profile/', views.edit_profile, name='myprofile'),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

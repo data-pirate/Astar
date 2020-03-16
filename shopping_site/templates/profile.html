@@ -1,0 +1,200 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/checkout.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/checkout_responsive.css' %}">
+{% endblock %}
+{% block content %}
+<!-- Home -->
+<div class="fixed-sn white-skin">
+    <main>
+        <div class="container-fluid">
+
+            <!-- Section: Edit Account -->
+            <section class="section">
+                <!-- First row -->
+                <form action="." method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <!-- First column -->
+
+                        <div class="col-lg-4 mb-4">
+
+                            <!-- Card -->
+                            <div class="card card-cascade narrower">
+
+                                <!-- Card image -->
+                                <div class="view view-cascade gradient-card-header mdb-color lighten-mygreen">
+                                    <h5 class="mb-0 font-weight-bold">Edit Photo</h5>
+                                </div>
+                                <!-- Card image -->
+
+                                <!-- Card content -->
+                                <div class="card-body card-body-cascade text-center">
+                                    <img src="/media/{{ p_form.photo }}" alt="User Photo"
+                                        style="width: 8rem; height: 8rem;" class="rounded z-depth-1 mb-3 mx-auto" />
+
+                                    <p class="text-muted"><small>Profile photo will be changed automatically</small></p>
+                                    <div class="row flex-center">
+                                        <div class="file-field md-form">
+                                            <div class="btn btn-rounded aqua-gradient btn-sm float-left">
+                                                <span>Choose file</span>
+                                                {{ profile_form.photo }}
+                                            </div>
+                                            <div class="file-path-wrapper">
+                                                <input class="file-path validate" type="text"
+                                                    placeholder="Upload your file">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Card content -->
+
+
+                            </div>
+                            <!-- Card -->
+                            <div class="card card-cascade narrower mt-5">
+                                <div class="view view-cascade gradient-card-header mdb-color lighten-mygreen">
+                                    <h5 class="mb-0 font-weight-bold">Change password</h5>
+                                </div>
+                                <div class="card-body card-body-cascade text-center">
+
+
+                                    <div class="col-md-12 text-center my-4">
+                                        <a href="{% url 'account_change_password' %}"
+                                            class="btn peach-gradient btn-rounded">Change Password</a>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <!-- First column -->
+
+                        <!-- Second column -->
+                        <div class="col-lg-8 mb-4">
+
+                            <!-- Card -->
+                            <div class="card card-cascade narrower">
+
+                                <!-- Card image -->
+                                <div class="view view-cascade gradient-card-header mdb-color lighten-mygreen">
+                                    <h5 class="mb-0 font-weight-bold">Edit Account</h5>
+                                </div>
+                                <!-- Card image -->
+
+                                <!-- Card content -->
+                                <div class="card-body card-body-cascade text-center">
+
+                                    <!-- Edit Form -->
+                                    <!-- First row -->
+                                    <div class="row">
+                                        <!-- First column -->
+                                        <div class="col-md-6">
+                                            <div class="md-form mb-0">
+                                                {{ user_form.username }}
+                                                <label for="{{ user_form.username.id_for_label }}" data-error="wrong"
+                                                    data-success="right">{{ user_form.username.html_name }}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Second row -->
+                                    <div class="row">
+                                        <!-- first column -->
+                                        <div class="col-md-6">
+                                            <div class="md-form mb-0">
+                                                {{ user_form.first_name }}
+                                                <label for="{{ user_form.first_name.id_for_label }}" data-error="wrong"
+                                                    data-success="right">{{ user_form.first_name.html_name }}</label>
+                                            </div>
+                                        </div>
+
+                                        <!-- second column -->
+                                        <div class="col-md-6">
+                                            <div class="md-form mb-0">
+                                                {{ user_form.last_name }}
+                                                <label for="{{ user_form.last_name.id_for_label }}" data-error="wrong"
+                                                    data-success="right">{{ user_form.last_name.html_name }}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- third row -->
+                                    <div class="row">
+                                        <!-- Second column -->
+                                        <div class="col-md-6">
+                                            <div class="md-form mb-0">
+                                                {{ user_form.email }}
+                                                <label for="{{ user_form.email.id_for_label }}" data-error="wrong"
+                                                    data-success="right">{{ user_form.email.html_name }}</label>
+                                            </div>
+                                        </div>
+                                        <!-- second column -->
+                                        <div class="col-md-6">
+                                            <div class="md-form mb-0">
+                                                {{ profile_form.dob }}
+                                                <label for="{{ profile_form.dob.id_for_label }}" data-error="wrong"
+                                                    data-success="right">{{ profile_form.dob.html_name }}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- foruth row -->
+                                    <div class="row">
+                                        <!-- first column -->
+
+                                    </div>
+                                    <!-- {{ profile_form.fields }} -->
+
+
+                                    <!-- Fourth row -->
+                                    <div class="row">
+                                        <div class="col-md-12 text-center my-4">
+                                            <input type="submit" value="Update Account"
+                                                class="btn aqua-gradient btn-rounded">
+                                        </div>
+                                    </div>
+                                    <!-- Fourth row -->
+                </form>
+                <!-- Edit Form -->
+
+        </div>
+        <!-- Card content -->
+
+</div>
+<!-- Card -->
+
+</div>
+<!-- Second column -->
+
+</div>
+<!-- First row -->
+
+</section>
+<!-- Section: Edit Account -->
+
+</div>
+
+</main>
+</div>
+<!-- Main layout -->
+{% endblock %}
+{% block js %}
+<script src="{% static 'js/checkout.js' %}"></script>
+<script type="text/javascript" src="{%static 'js/jquery.min.js' %}"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
+<!-- for inotalizing date picker -->
+<script>
+    $('.datepicker').pickadate({
+        closeOnSelect: true,
+        closeOnClear: true
+    })
+</script>
+{% endblock %}

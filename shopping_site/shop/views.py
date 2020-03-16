@@ -5,8 +5,8 @@ from django.views.generic import ListView, DetailView, View
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Item, Order, OrderItem, BillingAddress, ItemImages
-from .forms import CheckoutForm, AddProduct, EditProduct
+from .models import Item, Order, OrderItem, BillingAddress, ItemImages, Profile
+from .forms import CheckoutForm, AddProduct, EditProduct, ProfileEditForm, UserEditForm
 from django.forms import modelformset_factory
 # Create your views here.
 
@@ -43,12 +43,21 @@ def add_product(request):
 # Edit the existing product using its id
 def edit_product(request, id):
     item = get_object_or_404(Item, id=id)
+    ImageFormset = modelformset_factory(ItemImages, fields=('image',), extra=5)
     if item.user != request.user:
         raise Http404()
     if request.method == 'POST':
         form = EditProduct(request.POST or None, instance=item)
-        if form.is_valid():
+        formset = ImageFormset(request.POST or None, request.FILES or None)
+        if form.is_valid() and formset.is_valid():
             form.save()
+            for each in formset:
+                if each.cleaned_data:
+                    if each.cleaned_data['id'] is None:
+                        images = ItemImages(item=item, image=each.cleaned_data['image'])
+                        images.save()
+
+
             return HttpResponseRedirect(item.get_absolute_url())
     else:
         form = EditProduct(instance=item)
@@ -59,6 +68,14 @@ def edit_product(request, id):
 
     return render(request, 'edit_product.html', context)
 
+# delete_product
+@login_required
+def delete_product(request, id):
+    item = get_object_or_404(Item, id=id)
+    if item.user != request.user:
+        raise Http404()
+    item.delete()
+    return redirect('shop:index')
 
 # landing page
 class HomeView(ListView):
@@ -279,6 +296,31 @@ class Checkout(LoginRequiredMixin, View):
 class PaymentView(View):
     def get(self, *args, **kwargs):
         return render(self.request, 'payment.html')
+
+
+# profile edit page
+@login_required
+def edit_profile(request):
+    p_form = get_object_or_404(Profile, user=request.user) 
+
+    if request.method == 'POST':
+        user_form = UserEditForm(data=request.POST or None, instance=request.user)
+        profile_form = ProfileEditForm(data=request.POST or None, instance=request.user.profile, files=request.FILES)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            return redirect('shop:myprofile')
+    else:
+        user_form = UserEditForm(instance=request.user)
+        profile_form = ProfileEditForm(instance=request.user.profile)
+    
+    context = {
+        'user_form': user_form,
+        'profile_form': profile_form,
+        'p_form': p_form
+    }
+    return render(request, 'profile.html', context)
+
 
 #
 

@@ -145,9 +145,14 @@ class BillingAddress(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    dob = models.DateField(blank=True, null=True)
-    photo = models.ImageField(null=True, blank=True)
+    dob = models.DateField(verbose_name='Date of Birth',default='1997-01-01' ,blank=True, null=True)
+    photo = models.ImageField(null=True, blank=True, default='profilepic.png', upload_to='profile_pics')
 
 
     def __str__(self):
         return self.user.username
+
+    def delete_profile_pic(self, *args, **kwargs):
+        self.photo.delete()
+        super().delete(*args, **kwargs)
+

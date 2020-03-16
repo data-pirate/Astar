@@ -43,28 +43,27 @@
                                     {% for field in form %}
                                     {% if field.html_name == 'category' %}
                                     <div class="md-form">
-                                        <select name="{{ field.html_name }}" id="{{ field.id_for_label }}"
-                                            class="form-control">
-                                            <option selected>Category</option>
-                                            {% for name, value in form.fields.category.choices %}
-                                            <option value="{{ name }}">{{ value }}</option>
-                                            {% endfor %}
-                                        </select>
+                                        <div class="md-form">
+                                            <select name="{{ field.html_name }}" id="{{ field.id_for_label }}" class="mdb-select md-form colorful-select dropdown-success">
+                                                <option selected>Category</option>
+                                                {% for name, value in form.fields.label.choices %}
+                                                <option value="{{ name }}">{{ value }}</option>
+                                                {% endfor %}
+                                            </select>
                                     </div>
                                     {% elif field.html_name == 'sub_category' %}
                                     <div class="md-form">
-                                        <select name="{{ field.html_name }}" id="{{ field.id_for_label }}"
-                                            class="form-control">
-                                            <option selected>Sub Category</option>
-                                            {% for name, value in form.fields.sub_category.choices %}
-                                            <option value="{{ name }}">{{ value }}</option>
-                                            {% endfor %}
-                                        </select>
+                                        <div class="md-form">
+                                            <select name="{{ field.html_name }}" id="{{ field.id_for_label }}" class="mdb-select md-form colorful-select dropdown-success">
+                                                <option selected>Sub Category</option>
+                                                {% for name, value in form.fields.label.choices %}
+                                                <option class="font-weight-bold" value="{{ name }}">{{ value }}</option>
+                                                {% endfor %}
+                                            </select>
                                     </div>
                                     {% elif field.html_name == 'label' %}
                                     <div class="md-form">
-                                        <select name="{{ field.html_name }}" id="{{ field.id_for_label }}"
-                                            class="form-control">
+                                        <select name="{{ field.html_name }}" id="{{ field.id_for_label }}" class="mdb-select md-form colorful-select dropdown-success">
                                             <option selected>Label (Optional)</option>
                                             {% for name, value in form.fields.label.choices %}
                                             <option value="{{ name }}">{{ value }}</option>
@@ -85,7 +84,8 @@
                                     {% endfor %}
                             </div>
                             <div>
-                                <strong class="black-text font-weight-bold">Please Upload Some Images of the Product: </strong>
+                                <strong class="black-text font-weight-bold">Please Upload Some Images of the Product:
+                                </strong>
                             </div>
                             {{ formset.management_form }}
                             {% for field in formset %}
@@ -93,7 +93,13 @@
                                 <div class="file-field">
                                     <div class="btn btn-rounded aqua-gradient btn-sm float-left">
                                         <span>choose file</span>
-                                        {{ field }}
+                                        {% if forloop.counter < 3 %}
+                                        <input required type="file" name="form-{{ forloop.counter }}-image"
+                                            accept="image/*" id="{{ field.id_forlabel }}">
+                                        {% else %}
+                                        <input type="file" name="form-{{ forloop.counter }}-image" accept="image/*"
+                                            id="{{ field.id_forlabel }}">
+                                        {% endif %}
                                     </div>
                                     <div class="file-path-wrapper">
                                         <input class="file-path validate" type="text" placeholder="Upload your file">
@@ -131,4 +137,11 @@
 <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
+<!-- MDB select -->
+<script>
+    // Material Select Initialization
+    $(document).ready(function () {
+        $('.mdb-select').materialSelect();
+    });
+</script>
 {% endblock %}

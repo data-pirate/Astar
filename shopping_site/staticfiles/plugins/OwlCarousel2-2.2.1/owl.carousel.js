@@ -2588,10 +2588,10 @@
 	 * @public
 	 */
 	Autoplay.Defaults = {
-		autoplay: false,
-		autoplayTimeout: 5000,
-		autoplayHoverPause: false,
-		autoplaySpeed: false
+		autoplay: true,
+		autoplayTimeout: 800,
+		autoplayHoverPause: true,
+		autoplaySpeed: true
 	};
 
 	/**

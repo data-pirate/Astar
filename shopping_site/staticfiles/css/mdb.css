@@ -37,6 +37,10 @@
     background-color: #929fba !important
 }
 
+.mdb-color.lighten-mygreen {
+    background-color: #bbe432 !important
+}
+
 .mdb-color.lighten-2 {
     background-color: #7283a7 !important
 }
@@ -46,7 +50,10 @@
 }
 
 .mdb-color {
-    background-color: #45526e !important
+    background-color: #bbe432 !important
+}
+.mygreen-color {
+    background-color: #bbe432 !important
 }
 
 .mdb-color-text {
@@ -10765,6 +10772,7 @@ body.scrollable {
     border: none;
     border-bottom: 1px solid #ced4da;
     border-radius: 0;
+    font-family: 'Poppins', sans-serif;
     outline: none;
     -webkit-box-shadow: none;
     box-shadow: none;
@@ -15086,6 +15094,24 @@ table.table a.btn.btn-whatsapp {
 .dropright .dropdown-menu.dropdown-success .dropdown-item.active {
     background-color: #00c851 !important;
     border-radius: .125rem;
+    -webkit-box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15)
+}
+
+.dropdown .dropdown-menu.dropdown-mygreen .dropdown-item:hover,
+.dropdown .dropdown-menu.dropdown-mygreen .dropdown-item:active,
+.dropdown .dropdown-menu.dropdown-mygreen .dropdown-item.active,
+.dropup .dropdown-menu.dropdown-mygreen .dropdown-item:hover,
+.dropup .dropdown-menu.dropdown-mygreen .dropdown-item:active,
+.dropup .dropdown-menu.dropdown-mygreen .dropdown-item.active,
+.dropleft .dropdown-menu.dropdown-mygreen .dropdown-item:hover,
+.dropleft .dropdown-menu.dropdown-mygreen .dropdown-item:active,
+.dropleft .dropdown-menu.dropdown-mygreen .dropdown-item.active,
+.dropright .dropdown-menu.dropdown-mygreen .dropdown-item:hover,
+.dropright .dropdown-menu.dropdown-mygreen .dropdown-item:active,
+.dropright .dropdown-menu.dropdown-mygreen .dropdown-item.active {
+    background-color: #bbe432 !important;
+    border-radius: 1rem;
     -webkit-box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
     box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15)
 }
@@ -27031,7 +27057,7 @@ ul.stepper li.completed a .grey-skin .circle {
     justify-content: center;
     padding-bottom: .3125rem;
     font-weight: 400;
-    background-color: #4285f4
+    background-color: #bbe432
 }
 
 .picker__box .picker__header .picker__date-display .picker__weekday-display {

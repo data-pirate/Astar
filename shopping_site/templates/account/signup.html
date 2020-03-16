@@ -1,108 +1,103 @@
-{% extends "account/base.html" %}
-
-{% load i18n %}
-{% load account socialaccount %}
-{% load static %}
-{% load crispy_forms_tags %}
-
-{% block head %}
+{% extends "account/base.html" %} {% load i18n %} {% load account socialaccount %} {% load static %}
+{% load crispy_forms_tags %} {% block head %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/main_styles.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'css/responsive.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'css/mdb.css' %}">
-{% endblock %}
-
-{% block head_title %}{% trans "Signup" %}{% endblock %}
-
-{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/mdb.css' %}"> {% endblock %}
+{% block head_title %}{% trans "Signup" %}{% endblock %} {% block content %}
 
 <form class="signup text-center" id="signup_form" method="POST" style="color: #757575;"
-  action="{% url 'account_signup' %}">
-  {% csrf_token %}
-  <!-- Material form register -->
-  <div class="card m-5">
+    action="{% url 'account_signup' %}">
+    {% csrf_token %}
+    <!-- Material form register -->
+    <div class="card m-5">
 
-    <h5 class="card-header black-text text-center py-4">
-      <strong>Sign up</strong>
-    </h5>
+        <div
+            class="rounded dusty-grass-gradient card-header my-green-color font-weight-bold black-text text-center py-4">
+            <h4 class="logo font-weight-bold black-text ">{% trans "Sign Up" %}</h4>
+        </div>
 
-    <!--Card content-->
-    <div class="card-body px-lg-5 pt-0">
-      <!-- messages -->
-      {% if messages %}
-      {% for message in messages %}
-      <div class="mt-2 alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-        {{ message }}
-        {{ message.tag }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      {% endfor %}
-      {% endif %}
-      
-      <!-- Form -->
-      {% for field in form %}
-      <!-- Password -->
-      {% if field.html_name == 'password1' %}
-      <div class="md-form">
-        {{ field }}
-        <label for="{{ field.id_for_label }}">Password</label>
-        <small id="{{ field.id_for_label }}HelpBlock" class="form-text text-muted mb-4">
-          At least 8 characters and 1 digit
-        </small>
-      </div>
-      {% elif field.html_name == 'password2' %}
-      <div class="md-form">
-        {{ field }}
-        <label for="{{ field.id_for_label }}">Password (again)</label>
+        <!--Card content-->
+        <div class="card-body px-lg-5 pt-0">
+            <!-- messages -->
+            {% if messages %} {% for message in messages %}
+            <div class="mt-2 alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }} {{ message.tag }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endfor %} {% endif %}
 
-      </div>
-      {% else %}
-      <div class="md-form mt-2">
-        {{ field}}
-        <label for="{{ field.id_for_label }}">{{ field.html_name }}</label>
-      </div>
-      {% endif %}
-      {% endfor %}
+            <!-- Form -->
+            {% for field in form %}
+            <!-- Password -->
+            {% if field.html_name == 'password1' %}
+            <div class="md-form">
+                {{ field }}
+                <label for="{{ field.id_for_label }}">Password</label>
+                <small id="{{ field.id_for_label }}HelpBlock" class="form-text text-muted mb-4">
+                    At least 8 characters and 1 digit
+                </small>
+            </div>
+            {% elif field.html_name == 'password2' %}
+            <div class="md-form">
+                {{ field }}
+                <label for="{{ field.id_for_label }}">Password (again)</label>
 
-      <!-- Newsletter -->
-      <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="materialRegisterFormNewsletter">
-        <label class="form-check-label" for="materialRegisterFormNewsletter">Subscribe to our newsletter</label>
-      </div>
+            </div>
+            {% else %}
+            <div class="md-form mt-2">
+                {{ field}}
+                <label for="{{ field.id_for_label }}">{{ field.html_name }}</label>
+            </div>
+            {% endif %} {% endfor %} {% if form.errors %} {% for field in form %} {% for error in field.errors %}
+            <div class="red-text m-0 mb-1 alert">
+                <strong>{{ error|escape }}</strong>
+            </div>
+            {% endfor %} {% endfor %} {% for error in form.non_field_errors %}
+            <div class="red-text m-0 mb-1 alert">
+                <strong>{{ error|escape }}</strong>
+            </div>
+            {% endfor %} {% endif %}
 
-      <!-- already have a sccount -->
-      <h4 class="m-2">{% blocktrans %}Already have an account? Then please <a class="lime-text"
-          href="{{ login_url }}">sign
-          in</a>.{% endblocktrans %}</h4>
+            <!-- Newsletter -->
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="materialRegisterFormNewsletter">
+                <label class="form-check-label" for="materialRegisterFormNewsletter">Subscribe to our newsletter</label>
+            </div>
+
+            <!-- already have a sccount -->
+            <h4 class="m-2">{% blocktrans %}Already have an account? Then please <a class="lime-text"
+                    href="{{ login_url }}">sign
+                    in</a>.{% endblocktrans %}</h4>
 
 
-      <!-- Sign up button -->
-      <button class="btn btn-outline-mygreen btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Sign
-        Up</button>
+            <!-- Sign up button -->
+            <button class="btn btn-outline-mygreen btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Sign
+                Up</button>
 
-      <!-- Social register -->
-      <p>or sign up with:</p>
+            <!-- Social register -->
+            <p>or sign up with:</p>
 
-      <a type="button" class="btn-floating btn-fb btn-sm">
-        <i class="fab fa-facebook-f"></i>
-      </a>
-      <a type="button" class="btn-floating btn-tw btn-sm">
-        <i class="fab fa-twitter"></i>
-      </a>
-      <a type="button" class="btn-floating btn-li btn-sm">
-        <i class="fab fa-linkedin-in"></i>
-      </a>
-      <a type="button" class="btn-floating btn-git btn-sm">
-        <i class="fab fa-github"></i>
-      </a>
+            <a type="button" class="btn-floating btn-fb btn-sm">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a type="button" class="btn-floating btn-tw btn-sm">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a type="button" class="btn-floating btn-li btn-sm">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a type="button" class="btn-floating btn-git btn-sm">
+                <i class="fab fa-github"></i>
+            </a>
 
-      <hr>
+            <hr>
 
-      <!-- Terms of service -->
-      <p>By clicking
-        <em>Sign up</em> you agree to our
-        <a href="" target="_blank">terms of service</a>
+            <!-- Terms of service -->
+            <p>By clicking
+                <em>Sign up</em> you agree to our
+                <a href="" target="_blank">terms of service</a>
 
 </form>
 <!-- Form -->
@@ -112,10 +107,6 @@
 </div>
 <!-- Material form register -->
 {% if redirect_field_value %}
-<input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-{% endif %}
+<input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" /> {% endif %}
 </form>
-
-
-
 {% endblock %}

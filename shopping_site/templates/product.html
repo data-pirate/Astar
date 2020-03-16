@@ -44,7 +44,19 @@
 									<li><a href="#">Hot Products</a></li>
 									<li><a href="#">New Products</a></li>
 									<li><a href="#">Sale Products</a></li>
-									<li class="justify-content-end" ><a href="{% url 'shop:edit_product' id=object.id %}">Edit this product</a></li>
+									{% if object.user == request.user %}
+									<li id="navbar-static-tools" class="dropdown">
+										<a class="black-text dropdown-toggle" data-toggle="dropdown"
+											aria-haspopup="true" aria-expanded="false">
+											Tools</a>
+										<div class="dropdown-menu dropdown-menu-right dropdown-info"
+											aria-labelledby="navbar-tools">
+											<a class="dropdown-item d-xl-none" href="#">Sale Products</a>
+											<a class="dropdown-item" href="{% url 'shop:edit_product' id=object.id %}">Edit this product</a>
+											<a class="dropdown-item" href="{% url 'shop:delete_product' id=object.id %}">Delete this product</a>
+										</div>
+									</li>
+									{% endif %}
 								</ul>
 							</div>
 						</div>
@@ -85,7 +97,7 @@
 									class="product_image_row d-flex flex-md-row flex-column align-items-start justify-content-start">
 									<div class="product_image_{{ forloop.counter }} product_image"><img
 											src="{{ each.image.url }}" alt="{{ object.title }}"></div>
-								{% elif forloop.counter == 5 %}
+									{% elif forloop.counter == 5 %}
 									<div class="product_image_{{ forloop.counter }} product_image"><img
 											src="{{ each.image.url }}" alt="{{ object.title }}"></div>
 								</div>
