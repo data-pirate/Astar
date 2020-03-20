@@ -23,9 +23,6 @@
     <div class="text-center">
         <form class="login text-center" method="POST" action="{% url 'account_login' %}">
             {% csrf_token %}
-            <!-- hawehfhja -->
-            <!-- Material form login -->
-
             <div
             class="rounded dusty-grass-gradient card-header my-green-color font-weight-bold black-text text-center py-4">
             <h4 class="logo font-weight-bold black-text ">{% trans "Sign In" %}</h4>
@@ -98,7 +95,6 @@
             </div>
 
     </div>
-    <!-- Material form login -->
     {% if redirect_field_value %}
     <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" /> {% endif %}
     </form>
